@@ -17,6 +17,7 @@ import com.example.appxx_appthemewallpaper.extensions.show
 import com.example.appxx_appthemewallpaper.model.Language
 import com.example.appxx_appthemewallpaper.util.CallBack
 import com.example.appxx_appthemewallpaper.util.PREFERENCE_SELECTED_LANGUAGE
+import vn.minh_nguyen.vkey.view_mover.ViewMover
 
 class LanguageStartActivity : BaseActivity<ActivityLanguageBinding>(R.layout.activity_language) {
     private var listLanguage: MutableList<Language> = ArrayList()
@@ -131,12 +132,12 @@ class LanguageStartActivity : BaseActivity<ActivityLanguageBinding>(R.layout.act
 
                 textTranslateHeader(stringLanguage)
 
-//                ViewMover
-//                    .move(binding.tapGif)
-//                    .to(binding.ivTick)
-//                    .attachTo(ViewMover.Point.BOTTOM)
-//                    .duration(1000)
-//                    .start()
+                ViewMover
+                    .move(binding.tapGif)
+                    .to(binding.ivTick)
+                    .attachTo(ViewMover.Point.BOTTOM)
+                    .duration(1000)
+                    .start()
                 isClickedItem = true
             }
         })
