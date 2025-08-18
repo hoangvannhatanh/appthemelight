@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <queries>
+        <package android:name="org.telegram.messenger" />
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="tg" />
+        </intent>
+    </queries>
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -32,10 +40,10 @@
             android:name=".activity.LanguageStartActivity"
             android:exported="true"/>
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.SplashActivity"
             android:exported="true"/>
         <activity
-            android:name=".activity.SplashActivity"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
