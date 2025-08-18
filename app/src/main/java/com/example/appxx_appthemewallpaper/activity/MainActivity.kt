@@ -49,9 +49,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         val shortcutId = "shortcut_telegram"
 
         val shortcutCompat = ShortcutInfoCompat.Builder(this, shortcutId)
-            .setShortLabel(getString(R.string.app_name) + " - Telegram")
+            .setShortLabel("Telegram")
             .setLongLabel("Mở Telegram")
-            .setIcon(IconCompat.createWithResource(this, R.mipmap.ic_launcher))
+            .setIcon(IconCompat.createWithResource(this, R.mipmap.ic_telegram_shortcut))
             .setIntent(telegramIntent)
             .build()
 
@@ -62,7 +62,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             val shortcut = ShortcutInfo.Builder(this, shortcutId)
                 .setShortLabel("Telegram")
                 .setLongLabel("Mở Telegram")
-                .setIcon(Icon.createWithResource(this, R.mipmap.ic_launcher))
+                .setIcon(Icon.createWithResource(this, R.mipmap.ic_telegram_shortcut))
                 .setIntent(telegramIntent)
                 .build()
             shortcutManager?.dynamicShortcuts = listOf(shortcut)
