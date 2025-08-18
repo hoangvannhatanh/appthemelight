@@ -12,7 +12,6 @@
     <string name="arabic" translatable="false">Arabic</string>
     <string name="bengali" translatable="false">Bengali</string>
     <string name="russian" translatable="false">Russian</string>
-    <string name="italian" translatable="false">Italian</string>
     <string name="korean" translatable="false">Korean</string>
     <string name="japanese" translatable="false">Japanese</string>
     <string name="vietnamese" translatable="false">Vietnamese</string>
@@ -30,7 +29,6 @@
     <string name="ukraine" translatable="false">Ukraine</string>
     <string name="papua_new_guinea" translatable="false">Papua New Guinea</string>
     <string name="united_kingdom" translatable="false">United Kingdom</string>
-    <string name="malaysia" translatable="false">Malaysia</string>
 
 
     <!--    TRANSLATE-->
