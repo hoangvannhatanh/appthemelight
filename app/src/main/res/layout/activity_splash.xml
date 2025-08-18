@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvLogo"
+            android:layout_width="@dimen/_110sdp"
+            android:layout_height="@dimen/_110sdp"
+            android:layout_marginBottom="@dimen/_250sdp"
+            android:backgroundTint="@color/transparent"
+            app:cardElevation="@dimen/_1sdp"
+            app:cardCornerRadius="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvAppName"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_14sdp"
+            android:fontFamily="@font/product_sans_bold"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cvLogo" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:foregroundGravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/tvLoading"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading_splash" />
+
+        <TextView
+            android:id="@+id/tvLoading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/product_sans_regular"
+            android:gravity="center"
+            android:indeterminate="true"
+            android:text="Unknown"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/loadFile"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.example.appxx_appthemewallpaper.util.CustomSeekbarSplash
+            android:id="@+id/loadFile"
+            android:layout_width="@dimen/_180sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_centerHorizontal="true"
+            android:indeterminate="true"
+            android:max="100"
+            android:progress="40"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/txtMessAdvertising"
+            app:layout_constraintEnd_toEndOf="@+id/txtMessAdvertising"
+            app:layout_constraintStart_toStartOf="@+id/txtMessAdvertising" />
+
+        <TextView
+            android:id="@+id/txtMessAdvertising"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_45sdp"
+            android:fontFamily="@font/product_sans_regular"
+            android:text="@string/splash_contain_advertising"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:foreground="?actionBarItemBackground"
+            android:padding="@dimen/_14sdp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            android:fontFamily="@font/product_sans_regular"
+            android:text="@string/why_uninstall_this_app"
+            android:textAlignment="textStart"
+            android:textColor="@color/white"
+            android:textFontWeight="800"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivBack" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@+id/tvUninstall"
+            app:layout_constraintTop_toBottomOf="@+id/tvContent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:background="@drawable/background_button_gradient_10"
+                    android:foreground="?actionBarItemBackground"
+                    android:paddingVertical="@dimen/_16sdp"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_14sdp"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:text="@string/description_uninstall_1"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cv2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    android:background="@drawable/background_button_gray_10"
+                    android:foreground="?actionBarItemBackground"
+                    android:paddingVertical="@dimen/_16sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/cv1">
+
+                    <TextView
+                        android:id="@+id/tv2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_14sdp"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:text="@string/description_uninstall_2"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cv3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    android:background="@drawable/background_button_gray_10"
+                    android:foreground="?actionBarItemBackground"
+                    android:paddingVertical="@dimen/_16sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/cv2">
+
+                    <TextView
+                        android:id="@+id/tv3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_14sdp"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:text="@string/description_uninstall_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cv4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    android:background="@drawable/background_button_gray_10"
+                    android:foreground="?actionBarItemBackground"
+                    android:paddingVertical="@dimen/_16sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/cv3">
+
+                    <TextView
+                        android:id="@+id/tv4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_14sdp"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:text="@string/description_uninstall_4"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cv5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    android:background="@drawable/background_button_gray_10"
+                    android:foreground="?actionBarItemBackground"
+                    android:paddingVertical="@dimen/_16sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/cv4">
+
+                    <TextView
+                        android:id="@+id/tv5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_14sdp"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:text="@string/description_uninstall_5"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cv6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    android:background="@drawable/background_button_gray_10"
+                    android:foreground="?actionBarItemBackground"
+                    android:paddingVertical="@dimen/_16sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/cv5">
+
+                    <TextView
+                        android:id="@+id/tv6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_14sdp"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:text="@string/description_uninstall_6"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/tvUninstall"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/background_button_white_10"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_10sdp"
+            android:text="@string/still_want_to_uninstall"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
+            app:fontFamily="@font/product_sans_regular"
+            app:layout_constraintBottom_toTopOf="@+id/tvCancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCancel"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:background="@drawable/background_button_gray_10"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_10sdp"
+            android:text="@string/cancel"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
+            app:fontFamily="@font/product_sans_regular"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/_5sdp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/loItem"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_55sdp"
+            android:background="@drawable/background_button_white_10"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingHorizontal="@dimen/_15sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvLangLogo"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="@dimen/_60sdp"
+                android:backgroundTint="@color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imLangLogo"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_english"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:shapeAppearanceOverlay="@style/ImageCorner8" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_14sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cvLangLogo"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/txtLanguageTitle"
+                    android:layout_width="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/product_sans_regular"
+                    android:text="@string/english"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textAlignment="textStart"
+                    android:textFontWeight="800"
+                    android:layoutDirection="ltr"
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/product_sans_regular"
+                    android:text="@string/english"
+                    android:textAlignment="textStart"
+                    android:layoutDirection="ltr"
+                    android:textColor="@color/color_677892"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtLanguageTitle" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

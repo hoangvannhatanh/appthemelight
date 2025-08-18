@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name" translatable="false">appxx_appthemewallpaper</string>
+    <string name="english" translatable="false">English</string>
+    <string name="hindi" translatable="false">Hindi</string>
+    <string name="spanish" translatable="false">Spanish</string>
+    <string name="french" translatable="false">French</string>
+    <string name="brazil" translatable="false">Brazil</string>
+    <string name="portuguese" translatable="false">Portuguese</string>
+    <string name="indonesian" translatable="false">Indonesian</string>
+    <string name="german" translatable="false">German</string>
+    <string name="chinese" translatable="false">Chinese</string>
+    <string name="arabic" translatable="false">Arabic</string>
+    <string name="bengali" translatable="false">Bengali</string>
+    <string name="russian" translatable="false">Russian</string>
+    <string name="italian" translatable="false">Italian</string>
+    <string name="korean" translatable="false">Korean</string>
+    <string name="japanese" translatable="false">Japanese</string>
+    <string name="vietnamese" translatable="false">Vietnamese</string>
+    <string name="turkish" translatable="false">Turkish</string>
+    <string name="switzerland" translatable="false">Switzerland</string>
+    <string name="eusaka" translatable="false">Eusaka</string>
+    <string name="gujarati" translatable="false">Gujarati</string>
+    <string name="hebrew" translatable="false">Hebrew</string>
+    <string name="bahasa_indonesia" translatable="false">Bahasa Indonesia</string>
+    <string name="kannada" translatable="false">Kannada</string>
+    <string name="malayalam" translatable="false">Malayalam</string>
+    <string name="marathi" translatable="false">Marathi</string>
+    <string name="tamil" translatable="false">Tamil</string>
+    <string name="telugu" translatable="false">Telugu</string>
+    <string name="ukraine" translatable="false">Ukraine</string>
+    <string name="papua_new_guinea" translatable="false">Papua New Guinea</string>
+    <string name="united_kingdom" translatable="false">United Kingdom</string>
+    <string name="malaysia" translatable="false">Malaysia</string>
+
+
+    <!--    TRANSLATE-->
+    <string name="go_to_setting">Go to setting</string>
+    <string name="please_grant_all_permissions">Please grant all permissions to access additional functionality.</string>
+    <string name="_uninstall">Uninstall</string>
+    <string name="no">No</string>
+    <string name="do_you_want_to_exit_app">Do you want to exit app?</string>
+    <string name="yes">Yes</string>
+    <string name="splash_contain_advertising">This action may contain advertising</string>
+    <string name="languages">Languages</string>
+    <string name="language">Language</string>
+    <string name="please_select_language_to_continue">Please select language to continue</string>
+    <string name="applying">Applying...</string>
+    <string name="applied">Applied</string>
+    <string name="search_languages">Search languages</string>
+    <string name="what_problems_do_you_encounter_during_use_this_app">What problems do you encounter during use this App?</string>
+    <string name="volume_booster_function_not_working">Volume booster function not working</string>
+    <string name="nothing_interesting_anymore">Nothing interesting anymore</string>
+    <string name="description_uninstall_1">Unstable Performance</string>
+    <string name="description_uninstall_2">Lack of Important Features</string>
+    <string name="description_uninstall_3">Poor UI/UX Experience</string>
+    <string name="description_uninstall_4">Bugs &amp; Technical Issues</string>
+    <string name="description_uninstall_5">Better Alternative Apps Available</string>
+    <string name="description_uninstall_6">Missing Tools</string>
+    <string name="why_uninstall_this_app">Why uninstall this App?</string>
+    <string name="still_want_to_uninstall">Still want to uninstall</string>
+    <string name="restart">Restart</string>
+    <string name="explore">Explore</string>
+    <string name="dont_uninstall_yet">Don\'t uninstall yet</string>
+    <string name="cancel">Cancel</string>
+</resources>
