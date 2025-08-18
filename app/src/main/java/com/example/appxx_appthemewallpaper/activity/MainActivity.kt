@@ -4,11 +4,17 @@ import android.view.LayoutInflater
 import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.graphics.drawable.IconCompat
 import com.example.appxx_appthemewallpaper.R
 import com.example.appxx_appthemewallpaper.databinding.ActivityMainBinding
@@ -51,7 +57,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         val shortcutCompat = ShortcutInfoCompat.Builder(this, shortcutId)
             .setShortLabel("Telegram")
             .setLongLabel("Mở Telegram")
-            .setIcon(IconCompat.createWithResource(this, R.mipmap.ic_telegram_shortcut))
+            .setIcon(buildTelegramAdaptiveIcon())
             .setIntent(telegramIntent)
             .build()
 
@@ -62,13 +68,48 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             val shortcut = ShortcutInfo.Builder(this, shortcutId)
                 .setShortLabel("Telegram")
                 .setLongLabel("Mở Telegram")
-                .setIcon(Icon.createWithResource(this, R.mipmap.ic_telegram_shortcut))
+                .setIcon(buildTelegramIcon())
                 .setIntent(telegramIntent)
                 .build()
             shortcutManager?.dynamicShortcuts = listOf(shortcut)
         } else {
             startActivity(launchIntent)
         }
+    }
+
+    private fun buildTelegramAdaptiveIcon(): IconCompat {
+        val size = resources.getDimensionPixelSize(android.R.dimen.app_icon_size)
+        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+
+        val bg = AppCompatResources.getDrawable(this, R.drawable.ic_telegram_adaptive_background)!!
+        val wrappedDrawable = DrawableCompat.wrap(bg)
+        DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#000000")) // màu đen
+        DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SRC_IN)
+
+        val fg = AppCompatResources.getDrawable(this, R.drawable.ic_telegram_adaptive_foreground)!!
+        val wrappedDrawable2 = DrawableCompat.wrap(fg)
+        DrawableCompat.setTint(wrappedDrawable2, Color.parseColor("#303030")) // màu đen
+        DrawableCompat.setTintMode(wrappedDrawable2, PorterDuff.Mode.SRC_IN)
+
+
+        bg.setBounds(0, 0, size, size); bg.draw(canvas)
+        fg.setBounds(0, 0, size, size); fg.draw(canvas)
+
+        return IconCompat.createWithAdaptiveBitmap(bitmap) // API 26+
+    }
+
+    private fun buildTelegramIcon(): Icon {
+        val size = resources.getDimensionPixelSize(android.R.dimen.app_icon_size)
+        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+
+        val bg = AppCompatResources.getDrawable(this, R.drawable.ic_telegram_adaptive_background)!!
+        val fg = AppCompatResources.getDrawable(this, R.drawable.ic_telegram_adaptive_foreground)!!
+        bg.setBounds(0, 0, size, size); bg.draw(canvas)
+        fg.setBounds(0, 0, size, size); fg.draw(canvas)
+
+        return Icon.createWithBitmap(bitmap) // API 26+
     }
 
 }
