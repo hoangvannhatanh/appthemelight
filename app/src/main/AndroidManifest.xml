@@ -39,7 +39,7 @@
         android:theme="@style/Theme.Appxx_appthemewallpaper"
         tools:targetApi="31">
         <activity
-            android:name=".activity.FacebookLauncherActivity"
+            android:name=".activity_launcher.FacebookLauncherActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:excludeFromRecents="true"
@@ -50,7 +50,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.TelegramLauncherActivity"
+            android:name=".activity_launcher.TelegramLauncherActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:excludeFromRecents="true"
@@ -61,7 +61,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.NetflixLauncherActivity"
+            android:name=".activity_launcher.NetflixLauncherActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:excludeFromRecents="true"
@@ -72,7 +72,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MessageLauncherActivity"
+            android:name=".activity_launcher.MessageLauncherActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:excludeFromRecents="true"
@@ -83,7 +83,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.TikTokLauncherActivity"
+            android:name=".activity_launcher.TikTokLauncherActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:excludeFromRecents="true"
@@ -94,7 +94,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.InstagramLauncherActivity"
+            android:name=".activity_launcher.InstagramLauncherActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:excludeFromRecents="true"
@@ -105,7 +105,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.TwitterLauncherActivity"
+            android:name=".activity_launcher.TwitterLauncherActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:excludeFromRecents="true"
@@ -116,7 +116,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ThreadLauncherActivity"
+            android:name=".activity_launcher.ThreadLauncherActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:excludeFromRecents="true"
@@ -127,7 +127,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ZaloLauncherActivity"
+            android:name=".activity_launcher.ZaloLauncherActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:excludeFromRecents="true"
@@ -138,7 +138,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ChromeLauncherActivity"
+            android:name=".activity_launcher.ChromeLauncherActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:excludeFromRecents="true"
@@ -149,7 +149,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.CallLauncherActivity"
+            android:name=".activity_launcher.CallLauncherActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:excludeFromRecents="true"

@@ -1,7 +1,6 @@
-package com.example.appxx_appthemewallpaper.activity
+package com.example.appxx_appthemewallpaper.activity_launcher
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity

@@ -10,7 +10,6 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Icon
-import android.net.Uri
 import android.os.Build
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
@@ -19,6 +18,7 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.graphics.drawable.IconCompat
 import com.example.appxx_appthemewallpaper.R
+import com.example.appxx_appthemewallpaper.activity_launcher.TelegramLauncherActivity
 import com.example.appxx_appthemewallpaper.databinding.ActivityEditShortcutBinding
 
 class EditShortcutActivity : BaseActivity<ActivityEditShortcutBinding>(R.layout.activity_edit_shortcut) {

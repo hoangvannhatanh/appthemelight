@@ -1,4 +1,4 @@
-package com.example.appxx_appthemewallpaper.activity
+package com.example.appxx_appthemewallpaper.activity_launcher
 
 import android.content.Intent
 import android.net.Uri
