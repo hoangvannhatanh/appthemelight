@@ -13,6 +13,7 @@
         <package android:name="org.thunderdog.challegram" />
         <package android:name="com.facebook.katana" />
         <package android:name="com.facebook.lite" />
+        <package android:name="com.netflix.mediaclient" />
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="tg" />
@@ -43,6 +44,17 @@
         </activity>
         <activity
             android:name=".activity.TelegramLauncherActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:excludeFromRecents="true"
+            android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.NetflixLauncherActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:excludeFromRecents="true"

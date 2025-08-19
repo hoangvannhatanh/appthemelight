@@ -41,6 +41,11 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
             val shortcutID = "shortcut_facebook"
             createShortcut(shortcutID, FacebookLauncherActivity::class.java, "Facebook", R.drawable.ic_facebook_adaptive_background, R.drawable.ic_facebook_adaptive_foreground)
         }
+        
+        binding.btnCreateNetflixShortcut.setOnClickListener {
+            val shortcutID = "shortcut_netflix"
+            createShortcut(shortcutID, NetflixLauncherActivity::class.java, "Netflix", R.drawable.ic_netflix_adaptive_background, R.drawable.ic_netflix_adaptive_foreground)
+        }
     }
 
     private fun createShortcut(shortcutID: String, activity: Class<*>, label: String, backGround: Int, icon: Int) {
