@@ -1,5 +1,8 @@
 package com.example.appxx_appthemewallpaper.activity
 
+import android.app.PendingIntent
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.view.LayoutInflater
 import android.content.Intent
 import android.content.pm.ShortcutInfo
@@ -33,6 +36,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun bindEvent() {
         binding.btnCreateTelegramShortcut.setOnClickListener {
             createTelegramPinnedShortcut()
+        }
+        
+        binding.btnCreateWidget.setOnClickListener {
+            createSystemInfoWidget()
         }
     }
 
@@ -110,6 +117,38 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         fg.setBounds(0, 0, size, size); fg.draw(canvas)
 
         return Icon.createWithBitmap(bitmap) // API 26+
+    }
+
+    private fun createSystemInfoWidget() {
+        val appWidgetManager = AppWidgetManager.getInstance(this)
+        val componentName = ComponentName(this, com.example.appxx_appthemewallpaper.widget.SystemInfoWidget::class.java)
+        
+        // Kiểm tra xem widget có được hỗ trợ không
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && appWidgetManager.isRequestPinAppWidgetSupported) {
+            // Tạo widget mới (Android 8.0+)
+            val successCallback = PendingIntent.getBroadcast(
+                this,
+                0,
+                Intent(this, com.example.appxx_appthemewallpaper.widget.SystemInfoWidget::class.java),
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+            
+            appWidgetManager.requestPinAppWidget(componentName, null, successCallback)
+        } else {
+            // Fallback: Hiển thị hướng dẫn cho người dùng
+            try {
+                val intent = Intent(AppWidgetManager.ACTION_APPWIDGET_PICK)
+                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
+                startActivity(intent)
+            } catch (e: Exception) {
+                // Nếu không thể mở widget picker, hiển thị thông báo
+                android.widget.Toast.makeText(
+                    this,
+                    "Vui lòng thêm widget thủ công từ màn hình chờ",
+                    android.widget.Toast.LENGTH_LONG
+                ).show()
+            }
+        }
     }
 
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    
+    <!-- Background circle -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,24m-20,0a20,20 0,1 1,40 0a20,20 0,1 1,-40 0" />
+    
+    <!-- Phone icon -->
+    <path
+        android:fillColor="#4A90E2"
+        android:pathData="M16,8h16c1.1,0 2,0.9 2,2v28c0,1.1 -0.9,2 -2,2H16c-1.1,0 -2,-0.9 -2,-2V10C14,8.9 14.9,8 16,8zM18,10v26h12V10H18zM22,36h8v2h-8V36z" />
+    
+    <!-- Battery indicator -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M20,12h8v2h-8V12zM20,14h6v1h-6V14z" />
+    
+    <!-- WiFi indicator -->
+    <path
+        android:fillColor="#FF9800"
+        android:pathData="M24,18c-2.2,0 -4,1.8 -4,4s1.8,4 4,4s4,-1.8 4,-4S26.2,18 24,18zM24,24c-1.1,0 -2,-0.9 -2,-2s0.9,-2 2,-2s2,0.9 2,2S25.1,24 24,24z" />
+        
+</vector>
