@@ -81,6 +81,11 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
             val shortcutID = "shortcut_chrome"
             createShortcut(shortcutID, ChromeLauncherActivity::class.java, "Chrome", R.drawable.ic_chrome_adaptive_background, R.drawable.ic_chrome_adaptive_foreground)
         }
+        
+        binding.btnCreateCallShortcut.setOnClickListener {
+            val shortcutID = "shortcut_call"
+            createShortcut(shortcutID, CallLauncherActivity::class.java, "Call", R.drawable.ic_call_adaptive_background, R.drawable.ic_call_adaptive_foreground)
+        }
     }
 
     private fun createShortcut(shortcutID: String, activity: Class<*>, label: String, backGround: Int, icon: Int) {

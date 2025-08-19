@@ -123,6 +123,18 @@
             android:text="Tạo shortcut Chrome"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btnCreateCallShortcut"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"/>
+            
+        <Button
+            android:id="@+id/btnCreateCallShortcut"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Tạo shortcut Call"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
