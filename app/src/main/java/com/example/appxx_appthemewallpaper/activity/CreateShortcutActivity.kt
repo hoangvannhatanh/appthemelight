@@ -120,14 +120,14 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
         val canvas = Canvas(bitmap)
 
         val bg = AppCompatResources.getDrawable(this, backGround)!!
-        val wrappedDrawable = DrawableCompat.wrap(bg)
-        DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#000000")) // màu đen
-        DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SRC_IN)
+//        val wrappedDrawable = DrawableCompat.wrap(bg)
+//        DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#000000")) // màu đen
+//        DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SRC_IN)
 
         val fg = AppCompatResources.getDrawable(this, icon)!!
-        val wrappedDrawable2 = DrawableCompat.wrap(fg)
-        DrawableCompat.setTint(wrappedDrawable2, Color.parseColor("#303030")) // màu đen
-        DrawableCompat.setTintMode(wrappedDrawable2, PorterDuff.Mode.SRC_IN)
+//        val wrappedDrawable2 = DrawableCompat.wrap(fg)
+//        DrawableCompat.setTint(wrappedDrawable2, Color.parseColor("#303030")) // màu đen
+//        DrawableCompat.setTintMode(wrappedDrawable2, PorterDuff.Mode.SRC_IN)
 
 
         bg.setBounds(0, 0, size, size); bg.draw(canvas)
@@ -142,9 +142,9 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
         val canvas = Canvas(bitmap)
 
         val bg = AppCompatResources.getDrawable(this, backGround)!!
-        val wrappedDrawable = DrawableCompat.wrap(bg)
-        DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#000000")) // màu đen
-        DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SRC_IN)
+//        val wrappedDrawable = DrawableCompat.wrap(bg)
+//        DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#000000")) // màu đen
+//        DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SRC_IN)
 
         val fg = AppCompatResources.getDrawable(this, icon)!!
         bg.setBounds(0, 0, size, size); bg.draw(canvas)
