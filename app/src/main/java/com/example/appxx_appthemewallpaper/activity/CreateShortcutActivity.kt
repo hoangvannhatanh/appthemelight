@@ -1,23 +1,18 @@
 package com.example.appxx_appthemewallpaper.activity
 
 import android.app.PendingIntent
-import android.appwidget.AppWidgetManager
-import android.content.ComponentName
 import android.view.LayoutInflater
 import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Icon
-import android.net.Uri
 import android.os.Build
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContextCompat
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.DrawableCompat
@@ -38,135 +33,142 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
 
     override fun bindEvent() {
         binding.btnCreateTelegramShortcut.setOnClickListener {
-//            createTelegramShortcut()
+            createTelegramShortcut()
         }
         
         binding.btnCreateFacbookShortcut.setOnClickListener {
-//            createFacebookShortcut()
+            createFacebookShortcut()
         }
     }
 
+    private fun createTelegramShortcut() {
+        val telegramIntent = Intent(this, TelegramLauncherActivity::class.java).apply {
+            action = Intent.ACTION_VIEW
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val shortcutManager = getSystemService(ShortcutManager::class.java)
+            if (shortcutManager.isRequestPinShortcutSupported) {
+                val shortcutInfo = ShortcutInfo.Builder(this, "shortcut_telegram")
+                    .setShortLabel("Telegram")
+                    .setLongLabel("Mở Telegram")
+                    .setIcon(buildTelegramIcon())
+                    .setIntent(telegramIntent)
+                    .build()
 
+                shortcutManager?.dynamicShortcuts = listOf(shortcutInfo)
 
-//    private fun createTelegramShortcut() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            // For Android O and above
-//            val shortcutManager = getSystemService(ShortcutManager::class.java)
-//
-//            if (shortcutManager != null) {
-//                if (shortcutManager.isRequestPinShortcutSupported) {
-//                    // Create intent that launches our TelegramLauncherActivity
-//                    val telegramIntent = Intent(this, TelegramLauncherActivity::class.java).apply {
-//                        action = Intent.ACTION_VIEW
-//                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-//                    }
-//
-//                    val shortcutInfo = ShortcutInfo.Builder(this, TELEGRAM_SHORTCUT_ID)
-//                        .setShortLabel(getString(R.string.shortcut_short_label))
-//                        .setLongLabel(getString(R.string.shortcut_long_label))
-//                        .setIcon(Icon.createWithResource(this, R.drawable.ic_shortcut_telegram))
-//                        .setIntent(telegramIntent)
-//                        .build()
-//
-//                    val pinnedShortcutCallbackIntent = shortcutManager.createShortcutResultIntent(shortcutInfo)
-//
-//                    val successCallback = PendingIntent.getBroadcast(
-//                        this, 0,
-//                        pinnedShortcutCallbackIntent,
-//                        PendingIntent.FLAG_IMMUTABLE
-//                    )
-//
-//                    shortcutManager.requestPinShortcut(shortcutInfo, successCallback.intentSender)
-//                    Toast.makeText(this, getString(R.string.shortcut_added), Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        } else {
-//            // For older Android versions, use ShortcutManagerCompat
-//            val telegramIntent = Intent(this, TelegramLauncherActivity::class.java).apply {
-//                action = Intent.ACTION_VIEW
-//                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-//            }
-//
-//            val shortcutInfo = ShortcutInfoCompat.Builder(this, TELEGRAM_SHORTCUT_ID)
-//                .setShortLabel("hehe")
-//                .setLongLabel(getString(R.string.shortcut_long_label))
-//                .setIcon(IconCompat.createWithResource(this, R.drawable.ic_shortcut_telegram))
-//                .setIntent(telegramIntent)
-//                .build()
-//
-//            if (ShortcutManagerCompat.isRequestPinShortcutSupported(this)) {
-//                ShortcutManagerCompat.requestPinShortcut(this, shortcutInfo, null)
-//                Toast.makeText(this, getString(R.string.shortcut_added), Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
-//
-//    private fun createFacebookShortcut() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            // For Android O and above
-//            val shortcutManager = getSystemService(ShortcutManager::class.java)
-//
-//            if (shortcutManager != null) {
-//                if (shortcutManager.isRequestPinShortcutSupported) {
-//                    // Create intent that launches our FacebookLauncherActivity
-//                    val facebookIntent = Intent(this, FacebookLauncherActivity::class.java).apply {
-//                        action = Intent.ACTION_VIEW
-//                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-//                    }
-//
-////                    val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_facebook) //PNG
-//                    val bitmap = getBitmapFromVectorDrawable(R.drawable.ic_shortcut_facebook) //XML
-//                    val shortcutInfo = ShortcutInfo.Builder(this, FACEBOOK_SHORTCUT_ID)
-//                        .setShortLabel(getString(R.string.facebook_shortcut_short_label))
-//                        .setLongLabel(getString(R.string.facebook_shortcut_long_label))
-//                        .setIcon(Icon.createWithResource(this, R.drawable.ic_facebook))
-//                        .setIntent(facebookIntent)
-//                        .build()
-//
-//                    val pinnedShortcutCallbackIntent = shortcutManager.createShortcutResultIntent(shortcutInfo)
-//
-//                    val successCallback = PendingIntent.getBroadcast(
-//                        this, 0,
-//                        pinnedShortcutCallbackIntent,
-//                        PendingIntent.FLAG_IMMUTABLE
-//                    )
-//
-//                    shortcutManager.requestPinShortcut(shortcutInfo, successCallback.intentSender)
-//                    Toast.makeText(this, getString(R.string.shortcut_added), Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        } else {
-//            // For older Android versions, use ShortcutManagerCompat
-//            val facebookIntent = Intent(this, FacebookLauncherActivity::class.java).apply {
-//                action = Intent.ACTION_VIEW
-//                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-//            }
-//            val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_shortcut_facebook)
-//            val shortcutInfo = ShortcutInfoCompat.Builder(this, FACEBOOK_SHORTCUT_ID)
-//                .setShortLabel(getString(R.string.facebook_shortcut_short_label))
-//                .setLongLabel(getString(R.string.facebook_shortcut_long_label))
-//                .setIcon(IconCompat.createWithResource(this, R.drawable.ic_facebook))
-//                .setIntent(facebookIntent)
-//                .build()
-//
-//            if (ShortcutManagerCompat.isRequestPinShortcutSupported(this)) {
-//                ShortcutManagerCompat.requestPinShortcut(this, shortcutInfo, null)
-//                Toast.makeText(this, getString(R.string.shortcut_added), Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
+                val pinnedShortcutCallbackIntent = shortcutManager.createShortcutResultIntent(shortcutInfo)
 
-    private fun getBitmapFromVectorDrawable(drawableId: Int): Bitmap {
-        val drawable = ContextCompat.getDrawable(this, drawableId)!!
-        val bitmap = Bitmap.createBitmap(
-            drawable.intrinsicWidth,
-            drawable.intrinsicHeight,
-            Bitmap.Config.ARGB_8888
-        )
-        val canvas = Canvas(bitmap)
-        drawable.setBounds(0, 0, canvas.width, canvas.height)
-        drawable.draw(canvas)
-        return bitmap
+                val successCallback = PendingIntent.getBroadcast(
+                    this, 0,
+                    pinnedShortcutCallbackIntent,
+                    PendingIntent.FLAG_IMMUTABLE
+                )
+
+                shortcutManager.requestPinShortcut(shortcutInfo, successCallback.intentSender)
+            } else {
+                Toast.makeText(this, "SHORTCUT NOT SUPPORT", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            if (ShortcutManagerCompat.isRequestPinShortcutSupported(this)) {
+                val shortcutInfo = ShortcutInfoCompat.Builder(this, "shortcut_telegram")
+                    .setShortLabel("Telegram")
+                    .setLongLabel("Mở Telegram")
+                    .setIcon(buildTelegramAdaptiveIcon())
+                    .setIntent(telegramIntent)
+                    .build()
+
+                ShortcutManagerCompat.requestPinShortcut(this, shortcutInfo, null)
+                Toast.makeText(this, "SHORTCUT ADDED", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "SHORTCUT NOT SUPPORT", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
+    private fun buildTelegramAdaptiveIcon(): IconCompat {
+        val size = resources.getDimensionPixelSize(android.R.dimen.app_icon_size)
+        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+
+        val bg = AppCompatResources.getDrawable(this, R.drawable.ic_telegram_adaptive_background)!!
+        val wrappedDrawable = DrawableCompat.wrap(bg)
+        DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#000000")) // màu đen
+        DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SRC_IN)
+
+        val fg = AppCompatResources.getDrawable(this, R.drawable.ic_telegram_adaptive_foreground)!!
+        val wrappedDrawable2 = DrawableCompat.wrap(fg)
+        DrawableCompat.setTint(wrappedDrawable2, Color.parseColor("#303030")) // màu đen
+        DrawableCompat.setTintMode(wrappedDrawable2, PorterDuff.Mode.SRC_IN)
+
+
+        bg.setBounds(0, 0, size, size); bg.draw(canvas)
+        fg.setBounds(0, 0, size, size); fg.draw(canvas)
+
+        return IconCompat.createWithAdaptiveBitmap(bitmap) // API 26+
+    }
+
+    private fun buildTelegramIcon(): Icon {
+        val size = resources.getDimensionPixelSize(android.R.dimen.app_icon_size)
+        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+
+        val bg = AppCompatResources.getDrawable(this, R.drawable.ic_telegram_adaptive_background)!!
+        val wrappedDrawable = DrawableCompat.wrap(bg)
+        DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#000000")) // màu đen
+        DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SRC_IN)
+
+        val fg = AppCompatResources.getDrawable(this, R.drawable.ic_telegram_adaptive_foreground)!!
+        bg.setBounds(0, 0, size, size); bg.draw(canvas)
+        fg.setBounds(0, 0, size, size); fg.draw(canvas)
+
+        return Icon.createWithBitmap(bitmap) // API 26+
+    }
+
+    private fun createFacebookShortcut() {
+        val facebookIntent = Intent(this, FacebookLauncherActivity::class.java).apply {
+            action = Intent.ACTION_VIEW
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val shortcutManager = getSystemService(ShortcutManager::class.java)
+            if (shortcutManager.isRequestPinShortcutSupported) {
+                val shortcutInfo = ShortcutInfo.Builder(this, "shortcut_facebook")
+                    .setShortLabel("Facebook")
+                    .setLongLabel("Mở Facebook")
+                    .setIcon(buildTelegramIcon())
+                    .setIntent(facebookIntent)
+                    .build()
+
+                shortcutManager?.dynamicShortcuts = listOf(shortcutInfo)
+
+                val pinnedShortcutCallbackIntent = shortcutManager.createShortcutResultIntent(shortcutInfo)
+
+                val successCallback = PendingIntent.getBroadcast(
+                    this, 0,
+                    pinnedShortcutCallbackIntent,
+                    PendingIntent.FLAG_IMMUTABLE
+                )
+
+                shortcutManager.requestPinShortcut(shortcutInfo, successCallback.intentSender)
+            } else {
+                Toast.makeText(this, "SHORTCUT NOT SUPPORT", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            if (ShortcutManagerCompat.isRequestPinShortcutSupported(this)) {
+                val shortcutInfo = ShortcutInfoCompat.Builder(this, "shortcut_facebook")
+                    .setShortLabel("Facebook")
+                    .setLongLabel("Mở Facebook")
+                    .setIcon(buildTelegramAdaptiveIcon())
+                    .setIntent(facebookIntent)
+                    .build()
+
+                ShortcutManagerCompat.requestPinShortcut(this, shortcutInfo, null)
+                Toast.makeText(this, "SHORTCUT ADDED", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "SHORTCUT NOT SUPPORT", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 }

@@ -10,6 +10,9 @@
 
     <queries>
         <package android:name="org.telegram.messenger" />
+        <package android:name="org.thunderdog.challegram" />
+        <package android:name="com.facebook.katana" />
+        <package android:name="com.facebook.lite" />
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="tg" />
@@ -27,6 +30,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Appxx_appthemewallpaper"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.FacebookLauncherActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:excludeFromRecents="true"
+            android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.TelegramLauncherActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:excludeFromRecents="true"
+            android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".activity.CreateShortcutActivity"
             android:exported="true"/>

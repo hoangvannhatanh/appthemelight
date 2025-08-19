@@ -1,5 +1,6 @@
 package com.example.appxx_appthemewallpaper.activity
 
+import android.app.PendingIntent
 import android.view.LayoutInflater
 import android.content.Intent
 import android.content.pm.ShortcutInfo
@@ -11,6 +12,7 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
@@ -32,48 +34,54 @@ class EditShortcutActivity : BaseActivity<ActivityEditShortcutBinding>(R.layout.
 
     override fun bindEvent() {
         binding.btnCreateTelegramShortcut.setOnClickListener {
-            createTelegramPinnedShortcut()
+            createTelegramShortcut()
         }
     }
 
-    private fun createTelegramPinnedShortcut() {
-        val telegramUri = Uri.parse("tg://resolve?domain=telegram")
-        val telegramIntent = Intent(Intent.ACTION_VIEW, telegramUri).apply {
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    private fun createTelegramShortcut() {
+        val shortcutID = "shortcut_telegram ${System.currentTimeMillis()}"
+        val telegramIntent = Intent(this, TelegramLauncherActivity::class.java).apply {
+            action = Intent.ACTION_VIEW
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
-
-        // Fallback: mở app Telegram nếu có
-        val fallbackIntent = Intent().apply {
-            setPackage("org.telegram.messenger")
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-
-        val launchIntent = Intent.createChooser(telegramIntent, null).apply {
-            putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(fallbackIntent))
-        }
-
-        val shortcutId = "shortcut_telegram"
-
-        val shortcutCompat = ShortcutInfoCompat.Builder(this, shortcutId)
-            .setShortLabel("Telegram")
-            .setLongLabel("Mở Telegram")
-            .setIcon(buildTelegramAdaptiveIcon())
-            .setIntent(telegramIntent)
-            .build()
-
-        if (ShortcutManagerCompat.isRequestPinShortcutSupported(this)) {
-            ShortcutManagerCompat.requestPinShortcut(this, shortcutCompat, null)
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val shortcutManager = getSystemService(ShortcutManager::class.java)
-            val shortcut = ShortcutInfo.Builder(this, shortcutId)
-                .setShortLabel("Telegram")
-                .setLongLabel("Mở Telegram")
-                .setIcon(buildTelegramIcon())
-                .setIntent(telegramIntent)
-                .build()
-            shortcutManager?.dynamicShortcuts = listOf(shortcut)
+            if (shortcutManager.isRequestPinShortcutSupported) {
+                val shortcutInfo = ShortcutInfo.Builder(this, shortcutID)
+                    .setShortLabel("Telegram")
+                    .setLongLabel("Mở Telegram")
+                    .setIcon(buildTelegramIcon())
+                    .setIntent(telegramIntent)
+                    .build()
+
+                shortcutManager?.dynamicShortcuts = listOf(shortcutInfo)
+
+                val pinnedShortcutCallbackIntent = shortcutManager.createShortcutResultIntent(shortcutInfo)
+
+                val successCallback = PendingIntent.getBroadcast(
+                    this, 0,
+                    pinnedShortcutCallbackIntent,
+                    PendingIntent.FLAG_IMMUTABLE
+                )
+
+                shortcutManager.requestPinShortcut(shortcutInfo, successCallback.intentSender)
+            } else {
+                Toast.makeText(this, "SHORTCUT NOT SUPPORT", Toast.LENGTH_SHORT).show()
+            }
         } else {
-            startActivity(launchIntent)
+            if (ShortcutManagerCompat.isRequestPinShortcutSupported(this)) {
+                val shortcutInfo = ShortcutInfoCompat.Builder(this, shortcutID)
+                    .setShortLabel("Telegram")
+                    .setLongLabel("Mở Telegram")
+                    .setIcon(buildTelegramAdaptiveIcon())
+                    .setIntent(telegramIntent)
+                    .build()
+
+                ShortcutManagerCompat.requestPinShortcut(this, shortcutInfo, null)
+                Toast.makeText(this, "SHORTCUT ADDED", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "SHORTCUT NOT SUPPORT", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -106,6 +114,14 @@ class EditShortcutActivity : BaseActivity<ActivityEditShortcutBinding>(R.layout.
 
         val bg = AppCompatResources.getDrawable(this, R.drawable.ic_telegram_adaptive_background)!!
         val fg = AppCompatResources.getDrawable(this, R.drawable.ic_telegram_adaptive_foreground)!!
+        val wrappedDrawable = DrawableCompat.wrap(bg)
+        DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#000000")) // màu đen
+        DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SRC_IN)
+
+        val wrappedDrawable2 = DrawableCompat.wrap(fg)
+        DrawableCompat.setTint(wrappedDrawable2, Color.parseColor("#303030")) // màu đen
+        DrawableCompat.setTintMode(wrappedDrawable2, PorterDuff.Mode.SRC_IN)
+
         bg.setBounds(0, 0, size, size); bg.draw(canvas)
         fg.setBounds(0, 0, size, size); fg.draw(canvas)
 
