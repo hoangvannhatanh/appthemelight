@@ -7,30 +7,45 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        
+
         <Button
-            android:id="@+id/btnCreateTelegramShortcut"
+            android:id="@+id/btnCreateShortcut"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Tạo shortcut Telegram"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/btnCreateWidget"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="16dp"/>
-            
+            android:layout_marginBottom="16dp"
+            android:text="Tạo shortcut"
+            app:layout_constraintBottom_toTopOf="@+id/btnEditShortcut"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnEditShortcut"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:text="Chỉnh sửa shortcut"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btnCreateWidget"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCreateShortcut" />
+
         <Button
             android:id="@+id/btnCreateWidget"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Tạo Widget Thông Tin Hệ Thống"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"/>
-            
+            android:layout_marginBottom="24dp"
+            android:text="Tạo Widget"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnEditShortcut" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

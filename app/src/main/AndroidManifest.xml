@@ -28,6 +28,15 @@
         android:theme="@style/Theme.Appxx_appthemewallpaper"
         tools:targetApi="31">
         <activity
+            android:name=".activity.CreateShortcutActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".activity.EditShortcutActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".activity.CreateWidgetActivity"
+            android:exported="true"/>
+        <activity
             android:name=".activity.UninstallTwoActivity"
             android:exported="true"/>
         <activity

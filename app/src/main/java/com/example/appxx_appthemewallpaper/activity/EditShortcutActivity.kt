@@ -17,10 +17,10 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.graphics.drawable.IconCompat
 import com.example.appxx_appthemewallpaper.R
-import com.example.appxx_appthemewallpaper.databinding.ActivityMainBinding
+import com.example.appxx_appthemewallpaper.databinding.ActivityEditShortcutBinding
 
-class Shortcut_FULL_COLOR_Activity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
-    override fun setBinding(layoutInflater: LayoutInflater) = ActivityMainBinding.inflate(layoutInflater)
+class EditShortcutActivity : BaseActivity<ActivityEditShortcutBinding>(R.layout.activity_edit_shortcut) {
+    override fun setBinding(layoutInflater: LayoutInflater) = ActivityEditShortcutBinding.inflate(layoutInflater)
 
     override fun bindComponent() {
 
