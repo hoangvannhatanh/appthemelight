@@ -46,6 +46,41 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
             val shortcutID = "shortcut_netflix"
             createShortcut(shortcutID, NetflixLauncherActivity::class.java, "Netflix", R.drawable.ic_netflix_adaptive_background, R.drawable.ic_netflix_adaptive_foreground)
         }
+        
+        binding.btnCreateMessageShortcut.setOnClickListener {
+            val shortcutID = "shortcut_message"
+            createShortcut(shortcutID, MessageLauncherActivity::class.java, "Message", R.drawable.ic_message_adaptive_background, R.drawable.ic_message_adaptive_foreground)
+        }
+        
+        binding.btnCreateTikTokShortcut.setOnClickListener {
+            val shortcutID = "shortcut_tiktok"
+            createShortcut(shortcutID, TikTokLauncherActivity::class.java, "TikTok", R.drawable.ic_tiktok_adaptive_background, R.drawable.ic_tiktok_adaptive_foreground)
+        }
+        
+        binding.btnCreateInstagramShortcut.setOnClickListener {
+            val shortcutID = "shortcut_instagram"
+            createShortcut(shortcutID, InstagramLauncherActivity::class.java, "Instagram", R.drawable.ic_instagram_adaptive_background, R.drawable.ic_instagram_adaptive_foreground)
+        }
+        
+        binding.btnCreateTwitterShortcut.setOnClickListener {
+            val shortcutID = "shortcut_twitter"
+            createShortcut(shortcutID, TwitterLauncherActivity::class.java, "Twitter", R.drawable.ic_twitter_adaptive_background, R.drawable.ic_twitter_adaptive_foreground)
+        }
+        
+        binding.btnCreateThreadShortcut.setOnClickListener {
+            val shortcutID = "shortcut_thread"
+            createShortcut(shortcutID, ThreadLauncherActivity::class.java, "Thread", R.drawable.ic_thread_adaptive_background, R.drawable.ic_thread_adaptive_foreground)
+        }
+        
+        binding.btnCreateZaloShortcut.setOnClickListener {
+            val shortcutID = "shortcut_zalo"
+            createShortcut(shortcutID, ZaloLauncherActivity::class.java, "Zalo", R.drawable.ic_zalo_adaptive_background, R.drawable.ic_zalo_adaptive_foreground)
+        }
+        
+        binding.btnCreateChromeShortcut.setOnClickListener {
+            val shortcutID = "shortcut_chrome"
+            createShortcut(shortcutID, ChromeLauncherActivity::class.java, "Chrome", R.drawable.ic_chrome_adaptive_background, R.drawable.ic_chrome_adaptive_foreground)
+        }
     }
 
     private fun createShortcut(shortcutID: String, activity: Class<*>, label: String, backGround: Int, icon: Int) {
