@@ -7,18 +7,14 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.net.wifi.WifiManager
-import android.os.Build
 import android.widget.RemoteViews
 import com.example.appxx_appthemewallpaper.R
 import com.example.appxx_appthemewallpaper.activity.MainActivity
+import com.example.appxx_appthemewallpaper.service.WidgetUpdateService
 
 class SystemInfoWidget : AppWidgetProvider() {
 
-    override fun onUpdate(
-        context: Context,
-        appWidgetManager: AppWidgetManager,
-        appWidgetIds: IntArray
-    ) {
+    override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         for (appWidgetId in appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId)
         }
@@ -27,22 +23,18 @@ class SystemInfoWidget : AppWidgetProvider() {
     override fun onEnabled(context: Context) {
         super.onEnabled(context)
         // Bắt đầu service cập nhật khi widget được tạo
-        val serviceIntent = Intent(context, com.example.appxx_appthemewallpaper.service.WidgetUpdateService::class.java)
+        val serviceIntent = Intent(context, WidgetUpdateService::class.java)
         context.startService(serviceIntent)
     }
     
     override fun onDisabled(context: Context) {
         super.onDisabled(context)
         // Dừng service khi widget bị xóa
-        val serviceIntent = Intent(context, com.example.appxx_appthemewallpaper.service.WidgetUpdateService::class.java)
+        val serviceIntent = Intent(context, WidgetUpdateService::class.java)
         context.stopService(serviceIntent)
     }
 
-    private fun updateAppWidget(
-        context: Context,
-        appWidgetManager: AppWidgetManager,
-        appWidgetId: Int
-    ) {
+    fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
         val views = RemoteViews(context.packageName, R.layout.widget_system_info)
         
         // Lấy thông tin hệ thống

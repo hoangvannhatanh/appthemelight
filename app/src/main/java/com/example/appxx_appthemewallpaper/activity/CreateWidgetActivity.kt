@@ -37,7 +37,7 @@ class CreateWidgetActivity : BaseActivity<ActivityCreateWidgetBinding>(R.layout.
             val successCallback = PendingIntent.getBroadcast(
                 this,
                 0,
-                Intent(this, com.example.appxx_appthemewallpaper.widget.SystemInfoWidget::class.java),
+                Intent(this, SystemInfoWidget::class.java),
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
             
