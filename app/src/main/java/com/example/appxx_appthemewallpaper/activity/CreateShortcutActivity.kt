@@ -15,18 +15,9 @@ import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import com.example.appxx_appthemewallpaper.R
-import com.example.appxx_appthemewallpaper.activity_launcher.CallLauncherActivity
-import com.example.appxx_appthemewallpaper.activity_launcher.ChromeLauncherActivity
-import com.example.appxx_appthemewallpaper.activity_launcher.FacebookLauncherActivity
-import com.example.appxx_appthemewallpaper.activity_launcher.InstagramLauncherActivity
-import com.example.appxx_appthemewallpaper.activity_launcher.MessageLauncherActivity
-import com.example.appxx_appthemewallpaper.activity_launcher.NetflixLauncherActivity
-import com.example.appxx_appthemewallpaper.activity_launcher.TelegramLauncherActivity
-import com.example.appxx_appthemewallpaper.activity_launcher.ThreadLauncherActivity
-import com.example.appxx_appthemewallpaper.activity_launcher.TikTokLauncherActivity
-import com.example.appxx_appthemewallpaper.activity_launcher.TwitterLauncherActivity
-import com.example.appxx_appthemewallpaper.activity_launcher.ZaloLauncherActivity
+import com.example.appxx_appthemewallpaper.activity_launcher.*
 import com.example.appxx_appthemewallpaper.databinding.ActivityCreateShortcutBinding
+import com.example.appxx_appthemewallpaper.util.*
 
 class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.layout.activity_create_shortcut) {
     override fun setBinding(layoutInflater: LayoutInflater) = ActivityCreateShortcutBinding.inflate(layoutInflater)
@@ -42,12 +33,12 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
     override fun bindEvent() {
         binding.btnCreateTelegramShortcut.setOnClickListener {
             val shortcutID = "shortcut_telegram"
-            createShortcut(shortcutID, TelegramLauncherActivity::class.java, "Telegram", R.drawable.ic_telegram_adaptive_background, R.drawable.ic_telegram_adaptive_foreground)
+            createShortcut(shortcutID, TelegramLauncherActivity::class.java, toFraktur("Telegram"), R.drawable.ic_telegram_adaptive_background, R.drawable.ic_telegram_adaptive_foreground)
         }
         
         binding.btnCreateFacbookShortcut.setOnClickListener {
             val shortcutID = "shortcut_facebook"
-            createShortcut(shortcutID, FacebookLauncherActivity::class.java, "Facebook", R.drawable.ic_facebook_adaptive_background, R.drawable.ic_facebook_adaptive_foreground)
+            createShortcut(shortcutID, FacebookLauncherActivity::class.java, toKanit("Facebook"), R.drawable.ic_facebook_adaptive_background, R.drawable.ic_facebook_adaptive_foreground)
         }
         
         binding.btnCreateNetflixShortcut.setOnClickListener {

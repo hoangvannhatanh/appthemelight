@@ -163,9 +163,6 @@
         </activity>
 
         <activity
-            android:name=".activity.CreateShortcutActivity"
-            android:exported="true"/>
-        <activity
             android:name=".activity.EditShortcutActivity"
             android:exported="true"/>
         <activity
@@ -194,6 +191,9 @@
             android:exported="true"/>
         <activity
             android:name=".activity.MainActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".activity.CreateShortcutActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
