@@ -14,54 +14,16 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appxx_appthemewallpaper.R
-import com.example.appxx_appthemewallpaper.activity_launcher.AppLauncherActivity
-import com.example.appxx_appthemewallpaper.activity_launcher.TelegramLauncherActivity
-import com.example.appxx_appthemewallpaper.adapter.LaunchAppAdapter
-import com.example.appxx_appthemewallpaper.databinding.ActivityCreateShortcutBinding
-import com.example.appxx_appthemewallpaper.model.CreateApp
-import com.example.appxx_appthemewallpaper.model.LaunchApp
-import com.example.appxx_appthemewallpaper.util.CallBack
-import com.example.appxx_appthemewallpaper.util.Util.Companion.getPackageList
-import com.example.appxx_appthemewallpaper.util.toFraktur
+import com.example.appxx_appthemewallpaper.activity_launcher.*
+import com.example.appxx_appthemewallpaper.databinding.ActivityCreateShortcut2Binding
+import com.example.appxx_appthemewallpaper.util.*
 
-class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.layout.activity_create_shortcut) {
-
-    private var listLaunchApp: List<LaunchApp> = arrayListOf()
-    private var listDefaultApp: List<LaunchApp> = arrayListOf()
-    private var listCreateApp: MutableList<CreateApp> = arrayListOf()
-    private val launchAppAdapter by lazy { LaunchAppAdapter() }
-    private var createAppSelect: CreateApp? = null
-
-    override fun setBinding(layoutInflater: LayoutInflater) = ActivityCreateShortcutBinding.inflate(layoutInflater)
+class CreateShortcutActivity2 : BaseActivity<ActivityCreateShortcut2Binding>(R.layout.activity_create_shortcut) {
+    override fun setBinding(layoutInflater: LayoutInflater) = ActivityCreateShortcut2Binding.inflate(layoutInflater)
 
     override fun bindComponent() {
-        listLaunchApp = queryAllLaunchApps()
-        listDefaultApp = getPackageList(this)
 
-        getListCreateApp()
-    }
-
-    private fun getListCreateApp() {
-        listLaunchApp.forEach { itemA ->
-            listDefaultApp.forEach { itemB ->
-                if (itemA.packageName == itemB.packageName) {
-                    listCreateApp.add(
-                        CreateApp(
-                            titleName1 = itemA.appLabel,
-                            titleName2 = itemA.appLabel,
-                            packageName1 = itemA.packageName,
-                            packageName2 = itemA.packageName,
-                            icon1 = itemA.icon,
-                            icon2 = itemB.icon,
-                        )
-                    )
-                }
-            }
-        }
-
-        initRecyclerview()
     }
 
     override fun bindData() {
@@ -69,63 +31,66 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
     }
 
     override fun bindEvent() {
-        launchAppAdapter.callBackLaunchApp(object : CallBack.CallBackLaunchApp {
-            override fun callBackLaunchApp(createApp: CreateApp, position: Int) {
-//                val newList = listCreateApp.mapIndexed { index, app ->
-//                    if (index == position) app.copy(isSelect = !app.isSelect)
-//                    else app // giữ nguyên
-//                }
-//                listCreateApp = newList.toMutableList()
-//
-//                // Update Adapter
-//                launchAppAdapter.updateList(listCreateApp)
-
-                launchAppAdapter.checkSelectView(position)
-                createAppSelect = createApp
-            }
-        })
-
-        binding.tvCreate.setOnClickListener {
-            createAppSelect?.let {
-                val shortcutID = "it_${it.titleName1}"
-                createShortcut(shortcutID, it.packageName1, toFraktur(it.titleName1), R.drawable.ic_telegram_adaptive_background, R.drawable.ic_telegram_adaptive_foreground)
-            }
+        binding.btnCreateTelegramShortcut.setOnClickListener {
+            val shortcutID = "shortcut_telegram"
+            createShortcut(shortcutID, TelegramLauncherActivity::class.java, toFraktur("Telegram"), R.drawable.ic_telegram_adaptive_background, R.drawable.ic_telegram_adaptive_foreground)
+        }
+        
+        binding.btnCreateFacbookShortcut.setOnClickListener {
+            val shortcutID = "shortcut_facebook"
+            createShortcut(shortcutID, FacebookLauncherActivity::class.java, toKanit("Facebook"), R.drawable.ic_facebook_adaptive_background, R.drawable.ic_facebook_adaptive_foreground)
+        }
+        
+        binding.btnCreateNetflixShortcut.setOnClickListener {
+            val shortcutID = "shortcut_netflix"
+            createShortcut(shortcutID, NetflixLauncherActivity::class.java, toSatoshi("Netflix"), R.drawable.ic_netflix_adaptive_background, R.drawable.ic_netflix_adaptive_foreground)
+        }
+        
+        binding.btnCreateMessageShortcut.setOnClickListener {
+            val shortcutID = "shortcut_message"
+            createShortcut(shortcutID, MessageLauncherActivity::class.java, toPoppins("Message"), R.drawable.ic_message_adaptive_background, R.drawable.ic_message_adaptive_foreground)
+        }
+        
+        binding.btnCreateTikTokShortcut.setOnClickListener {
+            val shortcutID = "shortcut_tiktok"
+            createShortcut(shortcutID, TikTokLauncherActivity::class.java, toProductSans("TikTok"), R.drawable.ic_tiktok_adaptive_background, R.drawable.ic_tiktok_adaptive_foreground)
+        }
+        
+        binding.btnCreateInstagramShortcut.setOnClickListener {
+            val shortcutID = "shortcut_instagram"
+            createShortcut(shortcutID, InstagramLauncherActivity::class.java, "Instagram", R.drawable.ic_instagram_adaptive_background, R.drawable.ic_instagram_adaptive_foreground)
+        }
+        
+        binding.btnCreateTwitterShortcut.setOnClickListener {
+            val shortcutID = "shortcut_twitter"
+            createShortcut(shortcutID, TwitterLauncherActivity::class.java, "Twitter", R.drawable.ic_twitter_adaptive_background, R.drawable.ic_twitter_adaptive_foreground)
+        }
+        
+        binding.btnCreateThreadShortcut.setOnClickListener {
+            val shortcutID = "shortcut_thread"
+            createShortcut(shortcutID, ThreadLauncherActivity::class.java, "Thread", R.drawable.ic_thread_adaptive_background, R.drawable.ic_thread_adaptive_foreground)
+        }
+        
+        binding.btnCreateZaloShortcut.setOnClickListener {
+            val shortcutID = "shortcut_zalo"
+            createShortcut(shortcutID, ZaloLauncherActivity::class.java, "Zalo", R.drawable.ic_zalo_adaptive_background, R.drawable.ic_zalo_adaptive_foreground)
+        }
+        
+        binding.btnCreateChromeShortcut.setOnClickListener {
+            val shortcutID = "shortcut_chrome"
+            createShortcut(shortcutID, ChromeLauncherActivity::class.java, "Chrome", R.drawable.ic_chrome_adaptive_background, R.drawable.ic_chrome_adaptive_foreground)
+        }
+        
+        binding.btnCreateCallShortcut.setOnClickListener {
+            val shortcutID = "shortcut_call"
+            createShortcut(shortcutID, CallLauncherActivity::class.java, "Call", R.drawable.ic_call_adaptive_background, R.drawable.ic_call_adaptive_foreground)
         }
     }
 
-    private fun queryAllLaunchApps(): List<LaunchApp> {
-        val mainIntent = Intent(Intent.ACTION_MAIN, null).apply {
-            addCategory(Intent.CATEGORY_LAUNCHER)
-        }
-        val resolveInfos = packageManager.queryIntentActivities(mainIntent, 0)
-        val apps = resolveInfos
-            .mapNotNull { ri ->
-                val label = ri.loadLabel(packageManager)?.toString() ?: return@mapNotNull null
-                val pkg = ri.activityInfo?.packageName ?: return@mapNotNull null
-                val icon = ri.loadIcon(packageManager)
-                LaunchApp(label, pkg, icon)
-            }
-            .distinctBy { it.packageName }
-            .sortedBy { it.appLabel.lowercase() }
-
-        apps.forEach {
-
-        }
-        return apps
-    }
-
-    private fun initRecyclerview() {
-        binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(this@CreateShortcutActivity, LinearLayoutManager.VERTICAL, false)
-            launchAppAdapter.addAll(listCreateApp)
-            adapter = launchAppAdapter
-        }
-    }
-
-    private fun createShortcut(shortcutID: String, packageName: String, label: String, backGround: Int, icon: Int) {
-        val telegramIntent = Intent(this, AppLauncherActivity::class.java).apply {
+    private fun createShortcut(shortcutID: String, activity: Class<*>, label: String, backGround: Int, icon: Int) {
+        val telegramIntent = Intent(this, activity).apply {
             action = Intent.ACTION_VIEW
-            putExtra(AppLauncherActivity.EXTRA_TARGET_PACKAGE, packageName)
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -142,7 +107,6 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
                         return
                     }
                 }
-
                 val shortcutInfo = ShortcutInfo.Builder(this, shortcutID)
                     .setShortLabel(label)
                     .setLongLabel(label)

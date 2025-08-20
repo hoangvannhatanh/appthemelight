@@ -27,6 +27,10 @@
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="tg" />
         </intent>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
     </queries>
 
     <application
@@ -161,6 +165,17 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity_launcher.AppLauncherActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:excludeFromRecents="true"
+            android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".activity.EditShortcutActivity"
@@ -201,7 +216,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <!-- Widget Receiver -->
         <receiver
             android:name=".widget.SystemInfoWidget"
@@ -213,7 +228,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/system_info_widget_info" />
         </receiver>
-        
+
         <!-- Widget Update Service -->
         <service
             android:name=".service.WidgetUpdateService"
