@@ -43,17 +43,17 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
         
         binding.btnCreateNetflixShortcut.setOnClickListener {
             val shortcutID = "shortcut_netflix"
-            createShortcut(shortcutID, NetflixLauncherActivity::class.java, "Netflix", R.drawable.ic_netflix_adaptive_background, R.drawable.ic_netflix_adaptive_foreground)
+            createShortcut(shortcutID, NetflixLauncherActivity::class.java, toSatoshi("Netflix"), R.drawable.ic_netflix_adaptive_background, R.drawable.ic_netflix_adaptive_foreground)
         }
         
         binding.btnCreateMessageShortcut.setOnClickListener {
             val shortcutID = "shortcut_message"
-            createShortcut(shortcutID, MessageLauncherActivity::class.java, "Message", R.drawable.ic_message_adaptive_background, R.drawable.ic_message_adaptive_foreground)
+            createShortcut(shortcutID, MessageLauncherActivity::class.java, toPoppins("Message"), R.drawable.ic_message_adaptive_background, R.drawable.ic_message_adaptive_foreground)
         }
         
         binding.btnCreateTikTokShortcut.setOnClickListener {
             val shortcutID = "shortcut_tiktok"
-            createShortcut(shortcutID, TikTokLauncherActivity::class.java, "TikTok", R.drawable.ic_tiktok_adaptive_background, R.drawable.ic_tiktok_adaptive_foreground)
+            createShortcut(shortcutID, TikTokLauncherActivity::class.java, toProductSans("TikTok"), R.drawable.ic_tiktok_adaptive_background, R.drawable.ic_tiktok_adaptive_foreground)
         }
         
         binding.btnCreateInstagramShortcut.setOnClickListener {
