@@ -8,13 +8,24 @@ import android.content.Context
 import android.content.Intent
 import android.net.wifi.WifiManager
 import android.widget.RemoteViews
+import android.os.Build
+import android.content.IntentFilter
 import com.example.appxx_appthemewallpaper.R
 import com.example.appxx_appthemewallpaper.activity.MainActivity
 import com.example.appxx_appthemewallpaper.service.WidgetUpdateService
 
 class SystemInfoWidget : AppWidgetProvider() {
 
+
+
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
+        // Đảm bảo service foreground đang chạy để nhận broadcast hệ thống
+        val serviceIntent = Intent(context, WidgetUpdateService::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(serviceIntent)
+        } else {
+            context.startService(serviceIntent)
+        }
         for (appWidgetId in appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId)
         }
@@ -24,7 +35,11 @@ class SystemInfoWidget : AppWidgetProvider() {
         super.onEnabled(context)
         // Bắt đầu service cập nhật khi widget được tạo
         val serviceIntent = Intent(context, WidgetUpdateService::class.java)
-        context.startService(serviceIntent)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(serviceIntent)
+        } else {
+            context.startService(serviceIntent)
+        }
     }
     
     override fun onDisabled(context: Context) {
@@ -67,11 +82,10 @@ class SystemInfoWidget : AppWidgetProvider() {
         try {
             val batteryManager = context.getSystemService(Context.BATTERY_SERVICE) as android.os.BatteryManager
             val batteryLevel = batteryManager.getIntProperty(android.os.BatteryManager.BATTERY_PROPERTY_CAPACITY)
-            val batteryStatus = batteryManager.getIntProperty(android.os.BatteryManager.BATTERY_PROPERTY_STATUS)
-            
-            val isCharging = batteryStatus == android.os.BatteryManager.BATTERY_STATUS_CHARGING || 
-                           batteryStatus == android.os.BatteryManager.BATTERY_STATUS_FULL
-            
+            val batteryIntent = context.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+            val status = batteryIntent?.getIntExtra(android.os.BatteryManager.EXTRA_STATUS, -1) ?: -1
+            val isCharging = status == android.os.BatteryManager.BATTERY_STATUS_CHARGING || status == android.os.BatteryManager.BATTERY_STATUS_FULL
+
             return if (isCharging) {
                 "🔋 Pin: $batteryLevel% (Sạc)"
             } else {
