@@ -101,6 +101,11 @@ class EditShortcutActivity : BaseActivity<ActivityEditShortcutBinding>(R.layout.
         DrawableCompat.setTintMode(wrappedDrawable2, PorterDuff.Mode.SRC_IN)
 
 
+        val a = (0.5f.coerceIn(0f, 1f) * 255).toInt()
+        bg.alpha = a
+        fg.alpha = a
+
+
         bg.setBounds(0, 0, size, size); bg.draw(canvas)
         fg.setBounds(0, 0, size, size); fg.draw(canvas)
 
@@ -121,6 +126,10 @@ class EditShortcutActivity : BaseActivity<ActivityEditShortcutBinding>(R.layout.
         val wrappedDrawable2 = DrawableCompat.wrap(fg)
         DrawableCompat.setTint(wrappedDrawable2, Color.parseColor("#303030")) // màu đen
         DrawableCompat.setTintMode(wrappedDrawable2, PorterDuff.Mode.SRC_IN)
+
+        val a = (0.5f.coerceIn(0f, 1f) * 255).toInt()
+        bg.alpha = a
+        fg.alpha = a
 
         bg.setBounds(0, 0, size, size); bg.draw(canvas)
         fg.setBounds(0, 0, size, size); fg.draw(canvas)
