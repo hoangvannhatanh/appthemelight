@@ -13,11 +13,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.appxx_appthemewallpaper.databinding.ItemCreateAppBinding
 import com.example.appxx_appthemewallpaper.extensions.isSingleCLick
 import com.example.appxx_appthemewallpaper.model.CreateApp
-import com.example.appxx_appthemewallpaper.util.CallBack
+import com.example.appxx_appthemewallpaper.util.*
 
 class CreateShortcutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var data: MutableList<CreateApp> = arrayListOf()
     private lateinit var context: Context
+    private var strFont = ""
 
     private var callBackLaunchApp: CallBack.CallBackLaunchApp? = null
 
@@ -41,6 +42,11 @@ class CreateShortcutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
+    fun updateFont(strFont: String) {
+        this.strFont = strFont
+        notifyDataSetChanged()
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ViewHolder).bindData(position)
@@ -51,10 +57,21 @@ class CreateShortcutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class ViewHolder(private val binding: ItemCreateAppBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(position: Int) {
+            binding.txtLanguageTitle1.isSelected = true
+            binding.txtLanguageTitle2.isSelected = true
+
             binding.ivLogo1.setImageDrawable(data[position].icon1)
             binding.ivLogo2.setImageDrawable(buildIcon(data[position].backgroundCreate, data[position].iconCreate))
             binding.txtLanguageTitle1.text = data[position].titleName1
-            binding.txtLanguageTitle2.text = data[position].titleName2
+
+            when (strFont) {
+                "Roboto" -> binding.txtLanguageTitle2.text = toRoboto(data[position].titleName2)
+                "Fraktur", "Gothic" -> binding.txtLanguageTitle2.text = toFraktur(data[position].titleName2)
+                "Kanit" -> binding.txtLanguageTitle2.text = toKanit(data[position].titleName2)
+                "Satoshi" -> binding.txtLanguageTitle2.text = toSatoshi(data[position].titleName2)
+                "Poppins" -> binding.txtLanguageTitle2.text = toPoppins(data[position].titleName2)
+                "Product Sans" -> binding.txtLanguageTitle2.text = toProductSans(data[position].titleName2)
+            }
 
             binding.cvLogo1.setOnClickListener {
                 if (!isSingleCLick()) {
@@ -71,7 +88,7 @@ class CreateShortcutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 }
 
                 if (data[position].packageName1.isNotEmpty()) {
-                    callBackLaunchApp?.callBackCreateShortcut(data[position], position)
+                    callBackLaunchApp?.callBackCreateShortcut(data[position], position, binding.txtLanguageTitle2.text.toString())
                 }
             }
         }

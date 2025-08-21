@@ -56,7 +56,6 @@
                     android:ellipsize="marquee"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
-                    android:fontFamily="@font/product_sans_regular"
                     android:gravity="center"
                     android:layoutDirection="ltr"
                     android:marqueeRepeatLimit="marquee_forever"
@@ -65,7 +64,7 @@
                     android:text="@string/english"
                     android:textColor="@color/white"
                     android:textFontWeight="800"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_14sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cvLogo1" />
@@ -124,7 +123,7 @@
                     android:text="@string/english"
                     android:textColor="@color/white"
                     android:textFontWeight="800"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_14sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cvLogo2" />
@@ -135,6 +134,7 @@
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:background="@drawable/background_stroke"
                 android:gravity="center"
                 android:paddingVertical="@dimen/_10sdp"

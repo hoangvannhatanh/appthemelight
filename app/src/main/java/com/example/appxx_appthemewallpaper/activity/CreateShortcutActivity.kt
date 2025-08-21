@@ -19,12 +19,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appxx_appthemewallpaper.R
 import com.example.appxx_appthemewallpaper.activity_launcher.AppLauncherActivity
 import com.example.appxx_appthemewallpaper.adapter.CreateShortcutAdapter
+import com.example.appxx_appthemewallpaper.adapter.FontAdapter
 import com.example.appxx_appthemewallpaper.databinding.ActivityCreateShortcutBinding
 import com.example.appxx_appthemewallpaper.model.CreateApp
 import com.example.appxx_appthemewallpaper.model.LaunchApp
 import com.example.appxx_appthemewallpaper.model.ThemeApp
 import com.example.appxx_appthemewallpaper.util.CallBack
 import com.example.appxx_appthemewallpaper.util.Util.Companion.getTheme1
+import com.example.appxx_appthemewallpaper.util.getListFont
 import com.example.appxx_appthemewallpaper.util.toFraktur
 
 class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.layout.activity_create_shortcut) {
@@ -33,14 +35,19 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
     private var listThemeShortcut: List<ThemeApp> = arrayListOf()
     private var listCreateShortcut: MutableList<CreateApp> = arrayListOf()
     private val createShortcutAdapter by lazy { CreateShortcutAdapter() }
+    private var listFont: MutableList<String> = arrayListOf()
+    private val fontAdapter by lazy { FontAdapter() }
 
     override fun setBinding(layoutInflater: LayoutInflater) = ActivityCreateShortcutBinding.inflate(layoutInflater)
 
     override fun bindComponent() {
+        listFont = getListFont()
         listAppHaveOnDevice = queryAllLaunchApps()
         listThemeShortcut = getTheme1()
 
         getListCreateApp()
+
+        initRecyclerviewFont()
     }
 
     private fun getListCreateApp() {
@@ -85,7 +92,7 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
             }
         }
 
-        initRecyclerview()
+        initRecyclerviewApp()
     }
 
     override fun bindData() {
@@ -94,10 +101,10 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
 
     override fun bindEvent() {
         createShortcutAdapter.callBackLaunchApp(object : CallBack.CallBackLaunchApp {
-            override fun callBackCreateShortcut(createApp: CreateApp, position: Int) {
+            override fun callBackCreateShortcut(createApp: CreateApp, position: Int, nameCreate: String) {
                 createApp.let {
                     val shortcutID = "ID_${it.idTheme}_${it.titleName1}"
-                    createShortcut(shortcutID, it.packageName1, toFraktur(it.titleName1), it.backgroundCreate, it.iconCreate)
+                    createShortcut(shortcutID, it.packageName1, nameCreate, it.backgroundCreate, it.iconCreate)
                 }
             }
 
@@ -114,6 +121,13 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
                     onShow = {},
                     onDismiss = {}
                 )
+            }
+        })
+
+        fontAdapter.callBackFont(object : CallBack.CallBackFont {
+            override fun callBackFont(font: String, position: Int) {
+                fontAdapter.checkSelectView(position)
+                createShortcutAdapter.updateFont(font)
             }
         })
     }
@@ -160,11 +174,20 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
         return filteredList
     }
 
-    private fun initRecyclerview() {
-        binding.recyclerView.apply {
+    private fun initRecyclerviewFont() {
+        binding.recyclerViewFont.apply {
+            layoutManager = LinearLayoutManager(this@CreateShortcutActivity, LinearLayoutManager.HORIZONTAL, false)
+            fontAdapter.addAll(listFont)
+            adapter = fontAdapter
+        }
+    }
+
+    private fun initRecyclerviewApp() {
+        binding.recyclerViewApp.apply {
             layoutManager = LinearLayoutManager(this@CreateShortcutActivity, LinearLayoutManager.VERTICAL, false)
             createShortcutAdapter.addAll(listCreateShortcut)
             adapter = createShortcutAdapter
+            createShortcutAdapter.updateFont("Roboto")
         }
     }
 

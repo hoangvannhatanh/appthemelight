@@ -11,10 +11,13 @@ class CallBack {
         fun callBackLanguage(language: String, key: String, position: Int)
     }
     interface CallBackLaunchApp {
-        fun callBackCreateShortcut(createApp: CreateApp, position: Int)
+        fun callBackCreateShortcut(createApp: CreateApp, position: Int, nameCreate: String)
         fun callBackImportApp(position: Int)
     }
     interface CallBackAllPackage {
         fun callBackAllPackage(launchApp: LaunchApp, position: Int)
+    }
+    interface CallBackFont {
+        fun callBackFont(font: String, position: Int)
     }
 }
