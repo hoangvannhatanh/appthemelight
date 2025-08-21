@@ -337,6 +337,6 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
         bg.setBounds(0, 0, size, size); bg.draw(canvas)
         fg.setBounds(0, 0, size, size); fg.draw(canvas)
 
-        return Icon.createWithBitmap(bitmap) // API 26+
+        return Icon.createWithAdaptiveBitmap(bitmap) // API 26+
     }
 }
