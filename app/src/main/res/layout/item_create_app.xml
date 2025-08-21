@@ -9,7 +9,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:foreground="?attr/selectableItemBackground"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/_14sdp"
+        android:paddingHorizontal="@dimen/_13ssp"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -64,7 +64,7 @@
                     android:text="@string/english"
                     android:textColor="@color/white"
                     android:textFontWeight="800"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_13ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cvLogo1" />
@@ -114,7 +114,6 @@
                     android:ellipsize="marquee"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
-                    android:fontFamily="@font/product_sans_regular"
                     android:gravity="center"
                     android:layoutDirection="ltr"
                     android:marqueeRepeatLimit="marquee_forever"
@@ -123,7 +122,7 @@
                     android:text="@string/english"
                     android:textColor="@color/white"
                     android:textFontWeight="800"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_13ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cvLogo2" />

@@ -65,7 +65,10 @@ class CreateShortcutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.txtLanguageTitle1.text = data[position].titleName1
 
             when (strFont) {
+                "Default" -> binding.txtLanguageTitle2.text = data[position].titleName2
                 "Roboto" -> binding.txtLanguageTitle2.text = toRoboto(data[position].titleName2)
+                "General Sans" -> binding.txtLanguageTitle2.text = toGeneralsans(data[position].titleName2)
+                "Helvetica Neue" -> binding.txtLanguageTitle2.text = toHelveticaNeue(data[position].titleName2)
                 "Fraktur", "Gothic" -> binding.txtLanguageTitle2.text = toFraktur(data[position].titleName2)
                 "Kanit" -> binding.txtLanguageTitle2.text = toKanit(data[position].titleName2)
                 "Satoshi" -> binding.txtLanguageTitle2.text = toSatoshi(data[position].titleName2)

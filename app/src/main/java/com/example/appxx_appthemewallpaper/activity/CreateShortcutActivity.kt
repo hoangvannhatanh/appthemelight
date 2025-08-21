@@ -187,7 +187,7 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
             layoutManager = LinearLayoutManager(this@CreateShortcutActivity, LinearLayoutManager.VERTICAL, false)
             createShortcutAdapter.addAll(listCreateShortcut)
             adapter = createShortcutAdapter
-            createShortcutAdapter.updateFont("Roboto")
+            createShortcutAdapter.updateFont("Default")
         }
     }
 

@@ -12,6 +12,8 @@ import com.example.appxx_appthemewallpaper.extensions.setBackGroundDrawable
 import com.example.appxx_appthemewallpaper.util.CallBack
 import com.example.appxx_appthemewallpaper.util.toFraktur
 import com.example.appxx_appthemewallpaper.util.toKanit
+import com.example.appxx_appthemewallpaper.util.toGeneralsans
+import com.example.appxx_appthemewallpaper.util.toHelveticaNeue
 import com.example.appxx_appthemewallpaper.util.toPoppins
 import com.example.appxx_appthemewallpaper.util.toProductSans
 import com.example.appxx_appthemewallpaper.util.toRoboto
@@ -58,7 +60,10 @@ class FontAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(position: Int) {
             when (data[position]) {
+                "Default" -> binding.tvFont.text = data[position]
                 "Roboto" -> binding.tvFont.text = toRoboto(data[position])
+                "General Sans" -> binding.tvFont.text = toGeneralsans(data[position])
+                "Helvetica Neue" -> binding.tvFont.text = toHelveticaNeue(data[position])
                 "Fraktur", "Gothic" -> binding.tvFont.text = toFraktur(data[position])
                 "Kanit" -> binding.tvFont.text = toKanit(data[position])
                 "Satoshi" -> binding.tvFont.text = toSatoshi(data[position])

@@ -5,8 +5,11 @@ package com.example.appxx_appthemewallpaper.util
 //Fraktur/Gothic
 fun getListFont(): MutableList<String> {
     val listFont: MutableList<String> = arrayListOf()
+    listFont.add("Default")
     listFont.add("Roboto")
     listFont.add("Fraktur")
+    listFont.add("General Sans")
+    listFont.add("Helvetica Neue")
     listFont.add("Gothic")
     listFont.add("Kanit")
     listFont.add("Satoshi")
@@ -14,36 +17,36 @@ fun getListFont(): MutableList<String> {
     listFont.add("Product Sans")
     return listFont
 }
+
 fun toRoboto(input: String): String {
-    val frakturUpper = mapOf(
-        'A' to "\uD835\uDD6C", 'B' to "\uD835\uDD05", 'C' to "\uD835\uDCB8",
-        'D' to "\uD835\uDD07", 'E' to "\uD835\uDD08", 'F' to "\uD835\uDD09",
-        'G' to "\uD835\uDD0A", 'H' to "\uD835\uDD0B", 'I' to "\uD835\uDD0C",
-        'J' to "\uD835\uDD0D", 'K' to "\uD835\uDD0E", 'L' to "\uD835\uDD77",
-        'M' to "\uD835\uDD10", 'N' to "\uD835\uDD11", 'O' to "\uD835\uDD7A",
-        'P' to "\uD835\uDD13", 'Q' to "\uD835\uDD14", 'R' to "\uD835\uDCC7",
-        'S' to "\uD835\uDD16", 'T' to "\uD835\uDD17", 'U' to "\uD835\uDD18",
-        'V' to "\uD835\uDD19", 'W' to "\uD835\uDD1A", 'X' to "\uD835\uDD1B",
-        'Y' to "\uD835\uDD1C", 'Z' to "\uD835\uDD6B"
+    val robotoUpper = mapOf(
+        'A' to "\uD835\uDE08", 'B' to "\uD835\uDE09", 'C' to "\uD835\uDE0A",
+        'D' to "\uD835\uDE0B", 'E' to "\uD835\uDE0C", 'F' to "\uD835\uDE0D",
+        'G' to "\uD835\uDE0E", 'H' to "\uD835\uDE0F", 'I' to "\uD835\uDE10",
+        'J' to "\uD835\uDE11", 'K' to "\uD835\uDE12", 'L' to "\uD835\uDE13",
+        'M' to "\uD835\uDE14", 'N' to "\uD835\uDE15", 'O' to "\uD835\uDE16",
+        'P' to "\uD835\uDE17", 'Q' to "\uD835\uDE18", 'R' to "\uD835\uDE19",
+        'S' to "\uD835\uDE1A", 'T' to "\uD835\uDE1B", 'U' to "\uD835\uDE1C",
+        'V' to "\uD835\uDE1D", 'W' to "\uD835\uDE1E", 'X' to "\uD835\uDE1F",
+        'Y' to "\uD835\uDE20", 'Z' to "\uD835\uDE21"
     )
 
-
-    val frakturLower = mapOf(
-        'a' to "\uD835\uDD1E", 'b' to "\uD835\uDD1F", 'c' to "\uD835\uDCB8",
-        'd' to "\uD835\uDD21", 'e' to "\uD835\uDC52", 'f' to "\uD835\uDD23",
-        'g' to "\uD835\uDD24", 'h' to "\uD835\uDCBD", 'i' to "\uD835\uDD26",
-        'j' to "\uD835\uDD27", 'k' to "\uD835\uDD28", 'l' to "\uD835\uDD29",
-        'm' to "\uD835\uDCC2", 'n' to "\uD835\uDD2B", 'o' to "\uD835\uDC5C",
-        'p' to "\uD835\uDD2D", 'q' to "\uD835\uDD2E", 'r' to "\uD835\uDCC7",
-        's' to "\uD835\uDD30", 't' to "\uD835\uDD31", 'u' to "\uD835\uDD32",
-        'v' to "\uD835\uDD33", 'w' to "\uD835\uDD34", 'x' to "\uD835\uDD35",
-        'y' to "\uD835\uDD36", 'z' to "\uD835\uDD37"
+    val robotoLower = mapOf(
+        'a' to "\uD835\uDE22", 'b' to "\uD835\uDE23", 'c' to "\uD835\uDE24",
+        'd' to "\uD835\uDE25", 'e' to "\uD835\uDE26", 'f' to "\uD835\uDE27",
+        'g' to "\uD835\uDE28", 'h' to "\uD835\uDE29", 'i' to "\uD835\uDE2A",
+        'j' to "\uD835\uDE2B", 'k' to "\uD835\uDE2C", 'l' to "\uD835\uDE2D",
+        'm' to "\uD835\uDE2E", 'n' to "\uD835\uDE2F", 'o' to "\uD835\uDE30",
+        'p' to "\uD835\uDE31", 'q' to "\uD835\uDE32", 'r' to "\uD835\uDE33",
+        's' to "\uD835\uDE34", 't' to "\uD835\uDE35", 'u' to "\uD835\uDE36",
+        'v' to "\uD835\uDE37", 'w' to "\uD835\uDE38", 'x' to "\uD835\uDE39",
+        'y' to "\uD835\uDE3A", 'z' to "\uD835\uDE3B"
     )
 
     val builder = StringBuilder()
     for (c in input) {
         builder.append(
-            frakturUpper[c] ?: frakturLower[c] ?: c // nếu không có trong map thì giữ nguyên
+            robotoUpper[c] ?: robotoLower[c] ?: c
         )
     }
     return builder.toString()
@@ -84,36 +87,36 @@ fun toFraktur(input: String): String {
     return builder.toString()
 }
 
-//Kanit Font Style
+//Kanit Font Style (Mathematical Sans-Serif Bold Italic)
 fun toKanit(input: String): String {
     val kanitUpper = mapOf(
-        'A' to "\uD835\uDD38", 'B' to "\uD835\uDD39", 'C' to "\uD835\uDD3A",
-        'D' to "\uD835\uDD3B", 'E' to "\uD835\uDD3C", 'F' to "\uD835\uDD3D",
-        'G' to "\uD835\uDD3E", 'H' to "\uD835\uDD3F", 'I' to "\uD835\uDD40",
-        'J' to "\uD835\uDD41", 'K' to "\uD835\uDD42", 'L' to "\uD835\uDD43",
-        'M' to "\uD835\uDD44", 'N' to "\uD835\uDD45", 'O' to "\uD835\uDD46",
-        'P' to "\uD835\uDD47", 'Q' to "\uD835\uDD48", 'R' to "\uD835\uDD49",
-        'S' to "\uD835\uDD4A", 'T' to "\uD835\uDD4B", 'U' to "\uD835\uDD4C",
-        'V' to "\uD835\uDD4D", 'W' to "\uD835\uDD4E", 'X' to "\uD835\uDD4F",
-        'Y' to "\uD835\uDD50", 'Z' to "\uD835\uDD51"
+        'A' to "\uD835\uDE3C", 'B' to "\uD835\uDE3D", 'C' to "\uD835\uDE3E",
+        'D' to "\uD835\uDE3F", 'E' to "\uD835\uDE40", 'F' to "\uD835\uDE41",
+        'G' to "\uD835\uDE42", 'H' to "\uD835\uDE43", 'I' to "\uD835\uDE44",
+        'J' to "\uD835\uDE45", 'K' to "\uD835\uDE46", 'L' to "\uD835\uDE47",
+        'M' to "\uD835\uDE48", 'N' to "\uD835\uDE49", 'O' to "\uD835\uDE4A",
+        'P' to "\uD835\uDE4B", 'Q' to "\uD835\uDE4C", 'R' to "\uD835\uDE4D",
+        'S' to "\uD835\uDE4E", 'T' to "\uD835\uDE4F", 'U' to "\uD835\uDE50",
+        'V' to "\uD835\uDE51", 'W' to "\uD835\uDE52", 'X' to "\uD835\uDE53",
+        'Y' to "\uD835\uDE54", 'Z' to "\uD835\uDE55"
     )
 
     val kanitLower = mapOf(
-        'a' to "\uD835\uDD52", 'b' to "\uD835\uDD53", 'c' to "\uD835\uDD54",
-        'd' to "\uD835\uDD55", 'e' to "\uD835\uDD56", 'f' to "\uD835\uDD57",
-        'g' to "\uD835\uDD58", 'h' to "\uD835\uDD59", 'i' to "\uD835\uDD5A",
-        'j' to "\uD835\uDD5B", 'k' to "\uD835\uDD5C", 'l' to "\uD835\uDD5D",
-        'm' to "\uD835\uDD5E", 'n' to "\uD835\uDD5F", 'o' to "\uD835\uDD60",
-        'p' to "\uD835\uDD61", 'q' to "\uD835\uDD62", 'r' to "\uD835\uDD63",
-        's' to "\uD835\uDD64", 't' to "\uD835\uDD65", 'u' to "\uD835\uDD66",
-        'v' to "\uD835\uDD67", 'w' to "\uD835\uDD68", 'x' to "\uD835\uDD69",
-        'y' to "\uD835\uDD6A", 'z' to "\uD835\uDD6B"
+        'a' to "\uD835\uDE56", 'b' to "\uD835\uDE57", 'c' to "\uD835\uDE58",
+        'd' to "\uD835\uDE59", 'e' to "\uD835\uDE5A", 'f' to "\uD835\uDE5B",
+        'g' to "\uD835\uDE5C", 'h' to "\uD835\uDE5D", 'i' to "\uD835\uDE5E",
+        'j' to "\uD835\uDE5F", 'k' to "\uD835\uDE60", 'l' to "\uD835\uDE61",
+        'm' to "\uD835\uDE62", 'n' to "\uD835\uDE63", 'o' to "\uD835\uDE64",
+        'p' to "\uD835\uDE65", 'q' to "\uD835\uDE66", 'r' to "\uD835\uDE67",
+        's' to "\uD835\uDE68", 't' to "\uD835\uDE69", 'u' to "\uD835\uDE6A",
+        'v' to "\uD835\uDE6B", 'w' to "\uD835\uDE6C", 'x' to "\uD835\uDE6D",
+        'y' to "\uD835\uDE6E", 'z' to "\uD835\uDE6F"
     )
 
     val builder = StringBuilder()
     for (c in input) {
         builder.append(
-            kanitUpper[c] ?: kanitLower[c] ?: c // nếu không có trong map thì giữ nguyên
+            kanitUpper[c] ?: kanitLower[c] ?: c
         )
     }
     return builder.toString()
@@ -219,6 +222,80 @@ fun toProductSans(input: String): String {
     for (c in input) {
         builder.append(
             productSansUpper[c] ?: productSansLower[c] ?: c
+        )
+    }
+    return builder.toString()
+}
+
+// Generalsans (Sans-Serif Regular) Style
+fun toGeneralsans(input: String): String {
+    val generalSansUpper = mapOf(
+        'A' to "\uD835\uDDA0", 'B' to "\uD835\uDDA1", 'C' to "\uD835\uDDA2",
+        'D' to "\uD835\uDDA3", 'E' to "\uD835\uDDA4", 'F' to "\uD835\uDDA5",
+        'G' to "\uD835\uDDA6", 'H' to "\uD835\uDDA7", 'I' to "\uD835\uDDA8",
+        'J' to "\uD835\uDDA9", 'K' to "\uD835\uDDAA", 'L' to "\uD835\uDDAB",
+        'M' to "\uD835\uDDAC", 'N' to "\uD835\uDDAD", 'O' to "\uD835\uDDAE",
+        'P' to "\uD835\uDDAF", 'Q' to "\uD835\uDDB0", 'R' to "\uD835\uDDB1",
+        'S' to "\uD835\uDDB2", 'T' to "\uD835\uDDB3", 'U' to "\uD835\uDDB4",
+        'V' to "\uD835\uDDB5", 'W' to "\uD835\uDDB6", 'X' to "\uD835\uDDB7",
+        'Y' to "\uD835\uDDB8", 'Z' to "\uD835\uDDB9"
+    )
+
+    val generalSansLower = mapOf(
+        'a' to "\uD835\uDDBA", 'b' to "\uD835\uDDBB", 'c' to "\uD835\uDDBC",
+        'd' to "\uD835\uDDBD", 'e' to "\uD835\uDDBE", 'f' to "\uD835\uDDBF",
+        'g' to "\uD835\uDDC0", 'h' to "\uD835\uDDC1", 'i' to "\uD835\uDDC2",
+        'j' to "\uD835\uDDC3", 'k' to "\uD835\uDDC4", 'l' to "\uD835\uDDC5",
+        'm' to "\uD835\uDDC6", 'n' to "\uD835\uDDC7", 'o' to "\uD835\uDDC8",
+        'p' to "\uD835\uDDC9", 'q' to "\uD835\uDDCA", 'r' to "\uD835\uDDCB",
+        's' to "\uD835\uDDCC", 't' to "\uD835\uDDCD", 'u' to "\uD835\uDDCE",
+        'v' to "\uD835\uDDCF", 'w' to "\uD835\uDDD0", 'x' to "\uD835\uDDD1",
+        'y' to "\uD835\uDDD2", 'z' to "\uD835\uDDD3"
+    )
+
+    val builder = StringBuilder()
+    for (c in input) {
+        builder.append(
+            generalSansUpper[c] ?: generalSansLower[c] ?: c
+        )
+    }
+    return builder.toString()
+}
+
+fun toGeneralSans(input: String): String {
+    return toGeneralsans(input)
+}
+
+// Helvetica Neue (Sans-Serif Regular) Style
+fun toHelveticaNeue(input: String): String {
+    val helveticaUpper = mapOf(
+        'A' to "\uD835\uDDA0", 'B' to "\uD835\uDDA1", 'C' to "\uD835\uDDA2",
+        'D' to "\uD835\uDDA3", 'E' to "\uD835\uDDA4", 'F' to "\uD835\uDDA5",
+        'G' to "\uD835\uDDA6", 'H' to "\uD835\uDDA7", 'I' to "\uD835\uDDA8",
+        'J' to "\uD835\uDDA9", 'K' to "\uD835\uDDAA", 'L' to "\uD835\uDDAB",
+        'M' to "\uD835\uDDAC", 'N' to "\uD835\uDDAD", 'O' to "\uD835\uDDAE",
+        'P' to "\uD835\uDDAF", 'Q' to "\uD835\uDDB0", 'R' to "\uD835\uDDB1",
+        'S' to "\uD835\uDDB2", 'T' to "\uD835\uDDB3", 'U' to "\uD835\uDDB4",
+        'V' to "\uD835\uDDB5", 'W' to "\uD835\uDDB6", 'X' to "\uD835\uDDB7",
+        'Y' to "\uD835\uDDB8", 'Z' to "\uD835\uDDB9"
+    )
+
+    val helveticaLower = mapOf(
+        'a' to "\uD835\uDDBA", 'b' to "\uD835\uDDBB", 'c' to "\uD835\uDDBC",
+        'd' to "\uD835\uDDBD", 'e' to "\uD835\uDDBE", 'f' to "\uD835\uDDBF",
+        'g' to "\uD835\uDDC0", 'h' to "\uD835\uDDC1", 'i' to "\uD835\uDDC2",
+        'j' to "\uD835\uDDC3", 'k' to "\uD835\uDDC4", 'l' to "\uD835\uDDC5",
+        'm' to "\uD835\uDDC6", 'n' to "\uD835\uDDC7", 'o' to "\uD835\uDDC8",
+        'p' to "\uD835\uDDC9", 'q' to "\uD835\uDDCA", 'r' to "\uD835\uDDCB",
+        's' to "\uD835\uDDCC", 't' to "\uD835\uDDCD", 'u' to "\uD835\uDDCE",
+        'v' to "\uD835\uDDCF", 'w' to "\uD835\uDDD0", 'x' to "\uD835\uDDD1",
+        'y' to "\uD835\uDDD2", 'z' to "\uD835\uDDD3"
+    )
+
+    val builder = StringBuilder()
+    for (c in input) {
+        builder.append(
+            helveticaUpper[c] ?: helveticaLower[c] ?: c
         )
     }
     return builder.toString()
