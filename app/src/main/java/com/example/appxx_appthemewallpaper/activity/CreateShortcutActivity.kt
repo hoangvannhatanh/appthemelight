@@ -9,6 +9,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Icon
 import android.os.Build
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.pm.ShortcutInfoCompat
@@ -17,49 +18,58 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appxx_appthemewallpaper.R
 import com.example.appxx_appthemewallpaper.activity_launcher.AppLauncherActivity
-import com.example.appxx_appthemewallpaper.activity_launcher.TelegramLauncherActivity
 import com.example.appxx_appthemewallpaper.adapter.LaunchAppAdapter
 import com.example.appxx_appthemewallpaper.databinding.ActivityCreateShortcutBinding
 import com.example.appxx_appthemewallpaper.model.CreateApp
 import com.example.appxx_appthemewallpaper.model.LaunchApp
+import com.example.appxx_appthemewallpaper.model.ThemeApp
 import com.example.appxx_appthemewallpaper.util.CallBack
-import com.example.appxx_appthemewallpaper.util.Util.Companion.getPackageList
+import com.example.appxx_appthemewallpaper.util.Util.Companion.getTheme1
 import com.example.appxx_appthemewallpaper.util.toFraktur
 
 class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.layout.activity_create_shortcut) {
 
-    private var listLaunchApp: List<LaunchApp> = arrayListOf()
-    private var listDefaultApp: List<LaunchApp> = arrayListOf()
-    private var listCreateApp: MutableList<CreateApp> = arrayListOf()
+    private var listAppHaveOnDevice: List<LaunchApp> = arrayListOf()
+    private var listThemeShortcut: List<ThemeApp> = arrayListOf()
+    private var listSameApp: MutableList<CreateApp> = arrayListOf()
+    private var listNoSameApp: MutableList<CreateApp> = arrayListOf()
+    private var listShowOnRecyclerView: MutableList<CreateApp> = arrayListOf()
     private val launchAppAdapter by lazy { LaunchAppAdapter() }
-    private var createAppSelect: CreateApp? = null
 
     override fun setBinding(layoutInflater: LayoutInflater) = ActivityCreateShortcutBinding.inflate(layoutInflater)
 
     override fun bindComponent() {
-        listLaunchApp = queryAllLaunchApps()
-        listDefaultApp = getPackageList(this)
+        listAppHaveOnDevice = queryAllLaunchApps()
+        listThemeShortcut = getTheme1(this)
 
         getListCreateApp()
     }
 
     private fun getListCreateApp() {
-        listLaunchApp.forEach { itemA ->
-            listDefaultApp.forEach { itemB ->
+        listSameApp.clear()
+        listNoSameApp.clear()
+        listShowOnRecyclerView.clear()
+
+        listAppHaveOnDevice.forEach { itemA ->
+            listThemeShortcut.forEach { itemB ->
+
+                val createApp = CreateApp(
+                    idTheme = itemB.idTheme,
+                    titleName1 = itemA.appLabel,
+                    titleName2 = itemA.appLabel,
+                    packageName1 = itemA.packageName,
+                    packageName2 = itemA.packageName,
+                    icon1 = itemA.icon,
+                    icon2 = itemB.icon,
+                )
+
                 if (itemA.packageName == itemB.packageName) {
-                    listCreateApp.add(
-                        CreateApp(
-                            titleName1 = itemA.appLabel,
-                            titleName2 = itemA.appLabel,
-                            packageName1 = itemA.packageName,
-                            packageName2 = itemA.packageName,
-                            icon1 = itemA.icon,
-                            icon2 = itemB.icon,
-                        )
-                    )
+                    listSameApp.add(createApp)
                 }
             }
         }
+
+        listShowOnRecyclerView.addAll(listSameApp)
 
         initRecyclerview()
     }
@@ -71,26 +81,12 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
     override fun bindEvent() {
         launchAppAdapter.callBackLaunchApp(object : CallBack.CallBackLaunchApp {
             override fun callBackLaunchApp(createApp: CreateApp, position: Int) {
-//                val newList = listCreateApp.mapIndexed { index, app ->
-//                    if (index == position) app.copy(isSelect = !app.isSelect)
-//                    else app // giữ nguyên
-//                }
-//                listCreateApp = newList.toMutableList()
-//
-//                // Update Adapter
-//                launchAppAdapter.updateList(listCreateApp)
-
-                launchAppAdapter.checkSelectView(position)
-                createAppSelect = createApp
+                createApp.let {
+                    val shortcutID = "ID_${it.idTheme}_${it.titleName1}"
+                    createShortcut(shortcutID, it.packageName1, toFraktur(it.titleName1), R.drawable.ic_telegram_adaptive_background, R.drawable.ic_telegram_adaptive_foreground)
+                }
             }
         })
-
-        binding.tvCreate.setOnClickListener {
-            createAppSelect?.let {
-                val shortcutID = "it_${it.titleName1}"
-                createShortcut(shortcutID, it.packageName1, toFraktur(it.titleName1), R.drawable.ic_telegram_adaptive_background, R.drawable.ic_telegram_adaptive_foreground)
-            }
-        }
     }
 
     private fun queryAllLaunchApps(): List<LaunchApp> {
@@ -98,6 +94,7 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
             addCategory(Intent.CATEGORY_LAUNCHER)
         }
         val resolveInfos = packageManager.queryIntentActivities(mainIntent, 0)
+
         val apps = resolveInfos
             .mapNotNull { ri ->
                 val label = ri.loadLabel(packageManager)?.toString() ?: return@mapNotNull null
@@ -111,13 +108,33 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
         apps.forEach {
 
         }
-        return apps
+
+        val filteredList = apps.filter {
+            it.packageName in listOf(
+                "org.thunderdog.challegram",
+                "com.facebook.lite",
+                "com.netflix.mediaclient",
+                "com.zhiliaoapp.musically",
+                "com.twitter.android",
+                "com.zing.zalo",
+                "com.instagram.android",
+                "com.google.android.youtube",
+                "com.android.chrome",
+                "com.facebook.katana",
+//                "com.facebook.orca",
+//                "com.sec.android.app.camera",
+//                "org.telegram.messenger",
+//                "com.ss.android.ugc.trill",
+//                "com.sec.android.app.clockpackage"
+            )
+        }.toMutableList()
+        return filteredList
     }
 
     private fun initRecyclerview() {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@CreateShortcutActivity, LinearLayoutManager.VERTICAL, false)
-            launchAppAdapter.addAll(listCreateApp)
+            launchAppAdapter.addAll(listShowOnRecyclerView)
             adapter = launchAppAdapter
         }
     }

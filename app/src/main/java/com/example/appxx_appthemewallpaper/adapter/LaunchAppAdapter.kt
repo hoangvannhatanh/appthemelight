@@ -67,7 +67,7 @@ class LaunchAppAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 binding.root.background = null
             }
 
-            binding.root.setOnClickListener {
+            binding.tvCreate.setOnClickListener {
                 if (!isSingleCLick()) {
                     return@setOnClickListener
                 }

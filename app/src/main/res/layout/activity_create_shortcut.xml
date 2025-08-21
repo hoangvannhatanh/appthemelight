@@ -15,25 +15,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="@dimen/_10sdp"
             android:layout_marginHorizontal="@dimen/_14sdp"
-            app:layout_constraintBottom_toTopOf="@+id/tvCreate"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/tvCreate"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginHorizontal="@dimen/_14sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:background="@drawable/background_stroke"
-            android:gravity="center"
-            android:paddingVertical="@dimen/_10sdp"
-            android:text="Create"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
-            app:fontFamily="@font/product_sans_regular"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
