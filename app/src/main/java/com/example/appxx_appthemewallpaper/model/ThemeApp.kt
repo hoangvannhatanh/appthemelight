@@ -6,5 +6,6 @@ data class ThemeApp(
     val idTheme: String,
     val appLabel: String,
     val packageName: String,
-    val icon: Drawable
+    val iconCreate: Int,
+    val backGroundCreate: Int
 )

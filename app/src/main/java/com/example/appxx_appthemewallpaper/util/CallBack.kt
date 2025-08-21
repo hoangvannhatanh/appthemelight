@@ -1,6 +1,7 @@
 package com.example.appxx_appthemewallpaper.util
 
 import com.example.appxx_appthemewallpaper.model.CreateApp
+import com.example.appxx_appthemewallpaper.model.LaunchApp
 
 class CallBack {
     interface ICallBackProgress {
@@ -10,6 +11,10 @@ class CallBack {
         fun callBackLanguage(language: String, key: String, position: Int)
     }
     interface CallBackLaunchApp {
-        fun callBackLaunchApp(createApp: CreateApp, position: Int)
+        fun callBackCreateShortcut(createApp: CreateApp, position: Int)
+        fun callBackImportApp(createApp: CreateApp, position: Int)
+    }
+    interface CallBackAllPackage {
+        fun callBackAllPackage(launchApp: LaunchApp, position: Int)
     }
 }

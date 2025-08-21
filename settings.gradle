@@ -22,5 +22,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "appxx_appthemewallpaper"
+rootProject.name = "Theme App"
 include ':app'

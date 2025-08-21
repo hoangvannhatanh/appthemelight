@@ -9,6 +9,7 @@ data class CreateApp(
     val packageName1: String,
     val packageName2: String,
     val icon1: Drawable,
-    val icon2: Drawable,
+    val iconCreate: Int,
+    val backgroundCreate: Int,
     val isSelect: Boolean = false,
 )

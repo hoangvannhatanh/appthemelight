@@ -27,7 +27,6 @@ import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -35,8 +34,10 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import com.example.appxx_appthemewallpaper.R
 import com.example.appxx_appthemewallpaper.databinding.DialogExitAppBinding
+import com.example.appxx_appthemewallpaper.dialog.AllPackageDialog
 import com.example.appxx_appthemewallpaper.extensions.hideNavigation
 import com.example.appxx_appthemewallpaper.extensions.tryOrCatch
+import com.example.appxx_appthemewallpaper.model.LaunchApp
 import com.example.appxx_appthemewallpaper.util.LocaleHelper
 
 abstract class BaseActivity<V : ViewDataBinding> constructor(@LayoutRes val layoutResourceId: Int) : AppCompatActivity() {
@@ -227,5 +228,23 @@ abstract class BaseActivity<V : ViewDataBinding> constructor(@LayoutRes val layo
                 blockCatch = {}
             )
         }
+    }
+
+    fun showPopupAllPackage(context: Activity, onClick: (() -> Unit)? = null, onShow: (() -> Unit)? = null, onDismiss: (() -> Unit)? = null) {
+        val selectStepActivateDialog = AllPackageDialog(context = context)
+        selectStepActivateDialog.bindEvent(object : AllPackageDialog.OnPress {
+            override fun onClose() {}
+
+            override fun onProvidePermission(caunchApp: LaunchApp, position: Int) {
+                selectStepActivateDialog.dismiss()
+                onClick?.invoke()
+            }
+        })
+
+        selectStepActivateDialog.setOnDismissListener {
+            onDismiss?.invoke()
+        }
+        onShow?.invoke()
+        selectStepActivateDialog.show()
     }
 }

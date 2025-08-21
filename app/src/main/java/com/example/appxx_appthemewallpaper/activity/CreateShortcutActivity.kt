@@ -9,15 +9,18 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Icon
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appxx_appthemewallpaper.R
 import com.example.appxx_appthemewallpaper.activity_launcher.AppLauncherActivity
-import com.example.appxx_appthemewallpaper.adapter.LaunchAppAdapter
+import com.example.appxx_appthemewallpaper.adapter.CreateShortcutAdapter
 import com.example.appxx_appthemewallpaper.databinding.ActivityCreateShortcutBinding
 import com.example.appxx_appthemewallpaper.model.CreateApp
 import com.example.appxx_appthemewallpaper.model.LaunchApp
@@ -31,23 +34,19 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
     private var listAppHaveOnDevice: List<LaunchApp> = arrayListOf()
     private var listThemeShortcut: List<ThemeApp> = arrayListOf()
     private var listSameApp: MutableList<CreateApp> = arrayListOf()
-    private var listNoSameApp: MutableList<CreateApp> = arrayListOf()
-    private var listShowOnRecyclerView: MutableList<CreateApp> = arrayListOf()
-    private val launchAppAdapter by lazy { LaunchAppAdapter() }
+    private val createShortcutAdapter by lazy { CreateShortcutAdapter() }
 
     override fun setBinding(layoutInflater: LayoutInflater) = ActivityCreateShortcutBinding.inflate(layoutInflater)
 
     override fun bindComponent() {
         listAppHaveOnDevice = queryAllLaunchApps()
-        listThemeShortcut = getTheme1(this)
+        listThemeShortcut = getTheme1()
 
         getListCreateApp()
     }
 
     private fun getListCreateApp() {
         listSameApp.clear()
-        listNoSameApp.clear()
-        listShowOnRecyclerView.clear()
 
         listAppHaveOnDevice.forEach { itemA ->
             listThemeShortcut.forEach { itemB ->
@@ -58,7 +57,8 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
                     packageName1 = itemA.packageName,
                     packageName2 = itemA.packageName,
                     icon1 = itemA.icon,
-                    icon2 = itemB.icon,
+                    iconCreate = itemB.iconCreate,
+                    backgroundCreate = itemB.backGroundCreate,
                 )
 
                 if (itemA.packageName == itemB.packageName) {
@@ -75,19 +75,17 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
             if (!hasMatchingApp) {
                 val createApp = CreateApp(
                     idTheme = themeApp.idTheme,
-                    titleName1 = themeApp.appLabel,
-                    titleName2 = themeApp.appLabel,
-                    packageName1 = themeApp.packageName,
+                    titleName1 = "",
+                    titleName2 = "",
+                    packageName1 = "",
                     packageName2 = themeApp.packageName,
-                    icon1 = themeApp.icon,
-                    icon2 = themeApp.icon,
+                    icon1 = ContextCompat.getDrawable(this, themeApp.iconCreate),
+                    iconCreate = themeApp.iconCreate,
+                    backgroundCreate = themeApp.backGroundCreate,
                 )
-                listNoSameApp.add(createApp)
+                listSameApp.add(createApp)
             }
         }
-
-        listShowOnRecyclerView.addAll(listSameApp)
-        listShowOnRecyclerView.addAll(listNoSameApp)
 
         initRecyclerview()
     }
@@ -97,12 +95,26 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
     }
 
     override fun bindEvent() {
-        launchAppAdapter.callBackLaunchApp(object : CallBack.CallBackLaunchApp {
-            override fun callBackLaunchApp(createApp: CreateApp, position: Int) {
+        createShortcutAdapter.callBackLaunchApp(object : CallBack.CallBackLaunchApp {
+            override fun callBackCreateShortcut(createApp: CreateApp, position: Int) {
                 createApp.let {
                     val shortcutID = "ID_${it.idTheme}_${it.titleName1}"
-                    createShortcut(shortcutID, it.packageName1, toFraktur(it.titleName1), R.drawable.ic_telegram_adaptive_background, R.drawable.ic_telegram_adaptive_foreground)
+                    createShortcut(shortcutID, it.packageName1, toFraktur(it.titleName1), it.backgroundCreate, it.iconCreate)
                 }
+            }
+
+            override fun callBackImportApp(createApp: CreateApp, position: Int) {
+                showPopupAllPackage(this@CreateShortcutActivity,
+                    onClick = {
+
+                    },
+                    onShow = {
+
+                    },
+                    onDismiss = {
+
+                    }
+                )
             }
         })
     }
@@ -152,8 +164,8 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
     private fun initRecyclerview() {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@CreateShortcutActivity, LinearLayoutManager.VERTICAL, false)
-            launchAppAdapter.addAll(listShowOnRecyclerView)
-            adapter = launchAppAdapter
+            createShortcutAdapter.addAll(listSameApp)
+            adapter = createShortcutAdapter
         }
     }
 

@@ -1,19 +1,26 @@
 package com.example.appxx_appthemewallpaper.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appxx_appthemewallpaper.R
-import com.example.appxx_appthemewallpaper.databinding.ItemLaunchAppBinding
+import com.example.appxx_appthemewallpaper.databinding.ItemCreateAppBinding
 import com.example.appxx_appthemewallpaper.extensions.isSingleCLick
 import com.example.appxx_appthemewallpaper.extensions.setBackGroundDrawable
 import com.example.appxx_appthemewallpaper.model.CreateApp
 import com.example.appxx_appthemewallpaper.util.CallBack
 
-class LaunchAppAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CreateShortcutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var data: MutableList<CreateApp> = arrayListOf()
     var currentPos: Int = -1
+    private lateinit var context: Context
 
     private var callBackLaunchApp: CallBack.CallBackLaunchApp? = null
 
@@ -22,7 +29,8 @@ class LaunchAppAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemLaunchAppBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemCreateAppBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        context = parent.context
         return ViewHolder(binding)
     }
 
@@ -52,11 +60,11 @@ class LaunchAppAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return data.size
     }
 
-    inner class ViewHolder(private val binding: ItemLaunchAppBinding) :
+    inner class ViewHolder(private val binding: ItemCreateAppBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(position: Int) {
             binding.ivLogo1.setImageDrawable(data[position].icon1)
-            binding.ivLogo2.setImageDrawable(data[position].icon2)
+            binding.ivLogo2.setImageDrawable(buildIcon(data[position].backgroundCreate, data[position].iconCreate))
             binding.txtLanguageTitle1.text = data[position].titleName1
             binding.txtLanguageTitle2.text = data[position].titleName2
 
@@ -67,12 +75,42 @@ class LaunchAppAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 binding.root.background = null
             }
 
+            binding.cvLogo1.setOnClickListener {
+                if (!isSingleCLick()) {
+                    return@setOnClickListener
+                }
+                if (data[position].packageName1.isEmpty()) {
+                    callBackLaunchApp?.callBackImportApp(data[position], position)
+                }
+            }
+
             binding.tvCreate.setOnClickListener {
                 if (!isSingleCLick()) {
                     return@setOnClickListener
                 }
-                callBackLaunchApp?.callBackLaunchApp(data[position], position)
+
+                if (data[position].packageName1.isNotEmpty()) {
+                    callBackLaunchApp?.callBackCreateShortcut(data[position], position)
+                }
             }
         }
+    }
+
+    private fun buildIcon(backGround: Int, icon: Int): Drawable {
+        val size = context.resources.getDimensionPixelSize(android.R.dimen.app_icon_size)
+        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+
+        val bg = AppCompatResources.getDrawable(context, backGround)!!
+        val fg = AppCompatResources.getDrawable(context, icon)!!
+
+        bg.setBounds(0, 0, size, size)
+        bg.draw(canvas)
+
+        fg.setBounds(0, 0, size, size)
+        fg.draw(canvas)
+
+        // Chuyển bitmap thành drawable
+        return BitmapDrawable(context.resources, bitmap)
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">appxx_appthemewallpaper</string>
+    <string name="app_name" translatable="false">Theme App</string>
     <string name="english" translatable="false">English</string>
     <string name="hindi" translatable="false">Hindi</string>
     <string name="spanish" translatable="false">Spanish</string>
