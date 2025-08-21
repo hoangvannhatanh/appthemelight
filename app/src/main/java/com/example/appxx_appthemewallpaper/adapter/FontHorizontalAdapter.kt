@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appxx_appthemewallpaper.R
 import com.example.appxx_appthemewallpaper.databinding.ItemFontBinding
+import com.example.appxx_appthemewallpaper.databinding.ItemFontHorizontalBinding
 import com.example.appxx_appthemewallpaper.extensions.isSingleCLick
 import com.example.appxx_appthemewallpaper.extensions.setBackGroundDrawable
 import com.example.appxx_appthemewallpaper.util.CallBack
@@ -19,7 +20,7 @@ import com.example.appxx_appthemewallpaper.util.toProductSans
 import com.example.appxx_appthemewallpaper.util.toRoboto
 import com.example.appxx_appthemewallpaper.util.toSatoshi
 
-class FontAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FontHorizontalAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var data: MutableList<String> = arrayListOf()
     private lateinit var context: Context
 
@@ -39,7 +40,7 @@ class FontAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemFontBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemFontHorizontalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         context = parent.context
         return ViewHolder(binding)
     }
@@ -56,7 +57,7 @@ class FontAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount() = data.size
 
-    inner class ViewHolder(private val binding: ItemFontBinding) :
+    inner class ViewHolder(private val binding: ItemFontHorizontalBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(position: Int) {
             when (data[position]) {
@@ -71,7 +72,13 @@ class FontAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 "Product Sans" -> binding.tvFont.text = toProductSans(data[position])
             }
 
-            binding.tvCreate.setOnClickListener {
+            if (currentPos == adapterPosition) {
+                binding.loItem.setBackGroundDrawable(R.drawable.background_button_gradient_30)
+            } else {
+                binding.loItem.setBackGroundDrawable(R.drawable.background_button_gray_30)
+            }
+
+            binding.root.setOnClickListener {
                 if (!isSingleCLick()) {
                     return@setOnClickListener
                 }

@@ -1,5 +1,6 @@
 package com.example.appxx_appthemewallpaper.activity
 
+import android.app.Activity
 import android.app.PendingIntent
 import android.view.LayoutInflater
 import android.content.Intent
@@ -10,6 +11,7 @@ import android.graphics.Canvas
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.content.pm.ShortcutInfoCompat
@@ -19,7 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appxx_appthemewallpaper.R
 import com.example.appxx_appthemewallpaper.activity_launcher.AppLauncherActivity
 import com.example.appxx_appthemewallpaper.adapter.CreateShortcutAdapter
-import com.example.appxx_appthemewallpaper.adapter.FontAdapter
+import com.example.appxx_appthemewallpaper.adapter.FontHorizontalAdapter
 import com.example.appxx_appthemewallpaper.databinding.ActivityCreateShortcutBinding
 import com.example.appxx_appthemewallpaper.model.CreateApp
 import com.example.appxx_appthemewallpaper.model.LaunchApp
@@ -36,10 +38,23 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
     private var listCreateShortcut: MutableList<CreateApp> = arrayListOf()
     private val createShortcutAdapter by lazy { CreateShortcutAdapter() }
     private var listFont: MutableList<String> = arrayListOf()
-    private val fontAdapter by lazy { FontAdapter() }
+    private val fontAdapter by lazy { FontHorizontalAdapter() }
     private var numberTopicShortcut = "1"
 
     override fun setBinding(layoutInflater: LayoutInflater) = ActivityCreateShortcutBinding.inflate(layoutInflater)
+
+    private val startFontActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == Activity.RESULT_OK) {
+            val intent = it.data
+            intent?.let { intent ->
+                createShortcutAdapter.updateFont(intent.getStringExtra("KEY_FONT") ?: "Default")
+
+                val positionFont = intent.getIntExtra("KEY_POSITION", 0).toInt()
+                fontAdapter.checkSelectView(positionFont)
+                binding.recyclerViewFont.scrollToPosition(positionFont)
+            }
+        }
+    }
 
     override fun bindComponent() {
         listFont = getListFont()
@@ -140,6 +155,11 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
                 createShortcutAdapter.updateFont(font)
             }
         })
+
+        binding.tvFontMore.setOnClickListener {
+            val intent = Intent(this, FontActivity::class.java)
+            startFontActivity.launch(intent)
+        }
     }
 
     private fun queryAllLaunchApps(): List<LaunchApp> {

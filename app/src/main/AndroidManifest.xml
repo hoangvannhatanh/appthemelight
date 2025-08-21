@@ -178,6 +178,10 @@
         </activity>
 
         <activity
+            android:name=".activity.FontActivity"
+            android:exported="true"/>
+
+        <activity
             android:name=".activity.SelectTopicShortcutActivity"
             android:exported="true"/>
 
