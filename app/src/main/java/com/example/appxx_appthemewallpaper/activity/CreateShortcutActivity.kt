@@ -111,12 +111,8 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
                         listCreateShortcut[position].titleName2 = launchApp.appLabel
                         createShortcutAdapter.updateList(listCreateShortcut)
                     },
-                    onShow = {
-
-                    },
-                    onDismiss = {
-
-                    }
+                    onShow = {},
+                    onDismiss = {}
                 )
             }
         })

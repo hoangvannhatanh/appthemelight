@@ -33,9 +33,7 @@ class AllPackageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         (holder as ViewHolder).bindData(position)
     }
 
-    override fun getItemCount(): Int {
-        return data.size
-    }
+    override fun getItemCount() = data.size
 
     inner class ViewHolder(private val binding: ItemLaunchAppBinding) :
         RecyclerView.ViewHolder(binding.root) {
