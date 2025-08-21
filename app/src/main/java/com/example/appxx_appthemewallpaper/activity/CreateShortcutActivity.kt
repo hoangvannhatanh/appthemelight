@@ -292,7 +292,7 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
     }
 
     private fun buildAdaptiveIcon(backGround: Int, icon: Int): IconCompat {
-        val size = resources.getDimensionPixelSize(android.R.dimen.app_icon_size)
+        val size = (108 * resources.displayMetrics.density).toInt()
         val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
 
@@ -318,7 +318,7 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
     }
 
     private fun buildIcon(backGround: Int, icon: Int): Icon {
-        val size = resources.getDimensionPixelSize(android.R.dimen.app_icon_size)
+        val size = (108 * resources.displayMetrics.density).toInt()
         val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
 
