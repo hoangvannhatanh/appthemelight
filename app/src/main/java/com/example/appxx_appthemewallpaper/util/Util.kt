@@ -9,7 +9,6 @@ class Util {
     companion object {
         fun getTheme1(context: Context): MutableList<ThemeApp> = mutableListOf(
             ThemeApp("1", "Telegram", "org.thunderdog.challegram", ContextCompat.getDrawable(context, R.drawable.ic_instagram_adaptive_foreground)),
-            ThemeApp("1", "Facebook", "com.facebook.lite", ContextCompat.getDrawable(context, R.drawable.ic_facebook_adaptive_foreground)),
             ThemeApp("1", "Netflix", "com.netflix.mediaclient", ContextCompat.getDrawable(context, R.drawable.ic_netflix_adaptive_foreground)),
             ThemeApp("1", "Instagram", "com.instagram.android", ContextCompat.getDrawable(context, R.drawable.ic_instagram_adaptive_foreground)),
             ThemeApp("1", "TikTok", "com.zhiliaoapp.musically", ContextCompat.getDrawable(context, R.drawable.ic_instagram_adaptive_foreground)),
@@ -18,6 +17,7 @@ class Util {
             ThemeApp("1", "Zalo", "com.zing.zalo", ContextCompat.getDrawable(context, R.drawable.ic_instagram_adaptive_foreground)),
             ThemeApp("1", "Chrome", "com.android.chrome", ContextCompat.getDrawable(context, R.drawable.ic_instagram_adaptive_foreground)),
             ThemeApp("1", "Facebook", "com.facebook.katana", ContextCompat.getDrawable(context, R.drawable.ic_instagram_adaptive_foreground)),
+//            ThemeApp("1", "Facebook", "com.facebook.lite", ContextCompat.getDrawable(context, R.drawable.ic_facebook_adaptive_foreground)),
 //            ThemeApp("1", "Facebook", "com.facebook.orca", ContextCompat.getDrawable(context, R.drawable.ic_instagram_adaptive_foreground)),
             ThemeApp("1", "Camera", "com.sec.android.app.camera", ContextCompat.getDrawable(context, R.drawable.ic_instagram_adaptive_foreground)),
             ThemeApp("1", "Message", "org.telegram.messenger", ContextCompat.getDrawable(context, R.drawable.ic_instagram_adaptive_foreground)),

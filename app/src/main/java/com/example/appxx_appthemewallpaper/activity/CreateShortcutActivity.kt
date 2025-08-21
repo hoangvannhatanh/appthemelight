@@ -9,7 +9,6 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Icon
 import android.os.Build
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.pm.ShortcutInfoCompat
@@ -52,7 +51,6 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
 
         listAppHaveOnDevice.forEach { itemA ->
             listThemeShortcut.forEach { itemB ->
-
                 val createApp = CreateApp(
                     idTheme = itemB.idTheme,
                     titleName1 = itemA.appLabel,
@@ -69,7 +67,27 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
             }
         }
 
+        listThemeShortcut.forEach { themeApp ->
+            val hasMatchingApp = listAppHaveOnDevice.any { launchApp ->
+                launchApp.packageName == themeApp.packageName
+            }
+            
+            if (!hasMatchingApp) {
+                val createApp = CreateApp(
+                    idTheme = themeApp.idTheme,
+                    titleName1 = themeApp.appLabel,
+                    titleName2 = themeApp.appLabel,
+                    packageName1 = themeApp.packageName,
+                    packageName2 = themeApp.packageName,
+                    icon1 = themeApp.icon,
+                    icon2 = themeApp.icon,
+                )
+                listNoSameApp.add(createApp)
+            }
+        }
+
         listShowOnRecyclerView.addAll(listSameApp)
+        listShowOnRecyclerView.addAll(listNoSameApp)
 
         initRecyclerview()
     }
