@@ -12,7 +12,7 @@ class CallBack {
     }
     interface CallBackLaunchApp {
         fun callBackCreateShortcut(createApp: CreateApp, position: Int)
-        fun callBackImportApp(createApp: CreateApp, position: Int)
+        fun callBackImportApp(position: Int)
     }
     interface CallBackAllPackage {
         fun callBackAllPackage(launchApp: LaunchApp, position: Int)

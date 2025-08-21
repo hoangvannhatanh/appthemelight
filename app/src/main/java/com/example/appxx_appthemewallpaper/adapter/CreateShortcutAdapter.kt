@@ -10,16 +10,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
-import com.example.appxx_appthemewallpaper.R
 import com.example.appxx_appthemewallpaper.databinding.ItemCreateAppBinding
 import com.example.appxx_appthemewallpaper.extensions.isSingleCLick
-import com.example.appxx_appthemewallpaper.extensions.setBackGroundDrawable
 import com.example.appxx_appthemewallpaper.model.CreateApp
 import com.example.appxx_appthemewallpaper.util.CallBack
 
 class CreateShortcutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var data: MutableList<CreateApp> = arrayListOf()
-    var currentPos: Int = -1
     private lateinit var context: Context
 
     private var callBackLaunchApp: CallBack.CallBackLaunchApp? = null
@@ -44,13 +41,6 @@ class CreateShortcutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun checkSelectView(pos: Int) {
-        val oldPos = currentPos
-        currentPos = pos
-        notifyItemChanged(pos)
-        notifyItemChanged(oldPos)
-    }
-
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ViewHolder).bindData(position)
@@ -68,19 +58,12 @@ class CreateShortcutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.txtLanguageTitle1.text = data[position].titleName1
             binding.txtLanguageTitle2.text = data[position].titleName2
 
-
-            if (currentPos == adapterPosition) {
-                binding.root.setBackGroundDrawable(R.drawable.background_button_gradient_10)
-            } else {
-                binding.root.background = null
-            }
-
             binding.cvLogo1.setOnClickListener {
                 if (!isSingleCLick()) {
                     return@setOnClickListener
                 }
                 if (data[position].packageName1.isEmpty()) {
-                    callBackLaunchApp?.callBackImportApp(data[position], position)
+                    callBackLaunchApp?.callBackImportApp(position)
                 }
             }
 

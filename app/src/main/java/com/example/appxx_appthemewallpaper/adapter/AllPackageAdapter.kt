@@ -4,17 +4,13 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.appxx_appthemewallpaper.R
 import com.example.appxx_appthemewallpaper.databinding.ItemLaunchAppBinding
 import com.example.appxx_appthemewallpaper.extensions.isSingleCLick
-import com.example.appxx_appthemewallpaper.extensions.setBackGroundDrawable
-import com.example.appxx_appthemewallpaper.model.CreateApp
 import com.example.appxx_appthemewallpaper.model.LaunchApp
 import com.example.appxx_appthemewallpaper.util.CallBack
 
 class AllPackageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var data: MutableList<LaunchApp> = arrayListOf()
-    var currentPos: Int = -1
 
     private var callBackAllPackage: CallBack.CallBackAllPackage? = null
 
@@ -30,18 +26,6 @@ class AllPackageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     @SuppressLint("NotifyDataSetChanged")
     fun addAll(mData: MutableList<LaunchApp>) {
         this.data = mData
-    }
-
-    fun updateList(newList: MutableList<LaunchApp>) {
-        data = newList
-        notifyDataSetChanged()
-    }
-
-    fun checkSelectView(pos: Int) {
-        val oldPos = currentPos
-        currentPos = pos
-        notifyItemChanged(pos)
-        notifyItemChanged(oldPos)
     }
 
     @SuppressLint("NotifyDataSetChanged")

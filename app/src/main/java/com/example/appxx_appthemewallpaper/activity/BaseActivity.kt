@@ -34,7 +34,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import com.example.appxx_appthemewallpaper.R
 import com.example.appxx_appthemewallpaper.databinding.DialogExitAppBinding
-import com.example.appxx_appthemewallpaper.dialog.AllPackageDialog
+import com.example.appxx_appthemewallpaper.dialog.*
 import com.example.appxx_appthemewallpaper.extensions.hideNavigation
 import com.example.appxx_appthemewallpaper.extensions.tryOrCatch
 import com.example.appxx_appthemewallpaper.model.LaunchApp
@@ -230,14 +230,14 @@ abstract class BaseActivity<V : ViewDataBinding> constructor(@LayoutRes val layo
         }
     }
 
-    fun showPopupAllPackage(context: Activity, onClick: (() -> Unit)? = null, onShow: (() -> Unit)? = null, onDismiss: (() -> Unit)? = null) {
+    fun showPopupAllPackage(context: Activity, onClick: ((LaunchApp, Int) -> Unit)? = null, onShow: (() -> Unit)? = null, onDismiss: (() -> Unit)? = null) {
         val selectStepActivateDialog = AllPackageDialog(context = context)
         selectStepActivateDialog.bindEvent(object : AllPackageDialog.OnPress {
             override fun onClose() {}
 
-            override fun onProvidePermission(caunchApp: LaunchApp, position: Int) {
+            override fun onProvidePermission(launchApp: LaunchApp, position: Int) {
                 selectStepActivateDialog.dismiss()
-                onClick?.invoke()
+                onClick?.invoke(launchApp, position)
             }
         })
 

@@ -4,12 +4,12 @@ import android.graphics.drawable.Drawable
 
 data class CreateApp(
     val idTheme: String,
-    val titleName1: String,
-    val titleName2: String,
-    val packageName1: String,
-    val packageName2: String,
-    val icon1: Drawable,
-    val iconCreate: Int,
-    val backgroundCreate: Int,
-    val isSelect: Boolean = false,
+    var titleName1: String,
+    var titleName2: String,
+    var packageName1: String,
+    var packageName2: String,
+    var icon1: Drawable,
+    var iconCreate: Int,
+    var backgroundCreate: Int,
+    var isSelect: Boolean = false,
 )
