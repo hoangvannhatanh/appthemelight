@@ -5,136 +5,150 @@ import android.view.LayoutInflater
 import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Icon
 import android.os.Build
+import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.graphics.drawable.IconCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appxx_appthemewallpaper.R
 import com.example.appxx_appthemewallpaper.activity_launcher.TelegramLauncherActivity
+import com.example.appxx_appthemewallpaper.adapter.BackgroundColorAdapter
+import com.example.appxx_appthemewallpaper.adapter.IconColorAdapter
+import com.example.appxx_appthemewallpaper.adapter.FontHorizontalAdapter
 import com.example.appxx_appthemewallpaper.databinding.ActivityEditShortcutBinding
+import com.example.appxx_appthemewallpaper.extensions.showActivity
+import com.example.appxx_appthemewallpaper.util.*
 
 class EditShortcutActivity : BaseActivity<ActivityEditShortcutBinding>(R.layout.activity_edit_shortcut) {
+
+    private var listFont: MutableList<String> = arrayListOf()
+    private val fontAdapter by lazy { FontHorizontalAdapter() }
+    private var listIconColor: MutableList<String> = arrayListOf()
+    private var listBackgroundColor: MutableList<String> = arrayListOf()
+    private val colorAdapter by lazy { IconColorAdapter() }
+    private val backgroundAdapter by lazy { BackgroundColorAdapter() }
+    private var strColor = ""
+    private var strBackground = ""
+    private var strFont = "Default"
+
     override fun setBinding(layoutInflater: LayoutInflater) = ActivityEditShortcutBinding.inflate(layoutInflater)
 
     override fun bindComponent() {
+        listIconColor.apply {
+            add("#ffffff")
+            add("#000000")
+            add("#27A7E7")
+            add("#FDB5C0")
+            add("#677892")
+            add("#202020")
+        }
+        initRecyclerviewColor()
 
+        listBackgroundColor.apply {
+            add("#000000")
+            add("#ffffff")
+            add("#27A7E7")
+            add("#FDB5C0")
+            add("#677892")
+            add("#202020")
+        }
+        initRecyclerviewBackground()
+
+        listFont = getListFont()
+        initRecyclerviewFont()
     }
 
-    override fun bindData() {
-
-    }
+    override fun bindData() {}
 
     override fun bindEvent() {
-        binding.btnCreateTelegramShortcut.setOnClickListener {
-            createTelegramShortcut()
-        }
-    }
+        fontAdapter.callBackFont(object : CallBack.CallBackFont {
+            override fun callBackFont(font: String, position: Int) {
+                fontAdapter.checkSelectView(position)
 
-    private fun createTelegramShortcut() {
-        val shortcutID = "shortcut_telegram ${System.currentTimeMillis()}"
-        val telegramIntent = Intent(this, TelegramLauncherActivity::class.java).apply {
-            action = Intent.ACTION_VIEW
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val shortcutManager = getSystemService(ShortcutManager::class.java)
-            if (shortcutManager.isRequestPinShortcutSupported) {
-                val shortcutInfo = ShortcutInfo.Builder(this, shortcutID)
-                    .setShortLabel("Telegram")
-                    .setLongLabel("Mở Telegram")
-                    .setIcon(buildTelegramIcon())
-                    .setIntent(telegramIntent)
-                    .build()
+                val text = getString(R.string.app_name)
+                when (font) {
+                    "Default" -> binding.tvTitle.text = text
+                    "Roboto" -> binding.tvTitle.text = toRoboto(text)
+                    "General Sans" -> binding.tvTitle.text = toGeneralsans(text)
+                    "Helvetica Neue" -> binding.tvTitle.text = toHelveticaNeue(text)
+                    "Fraktur", "Gothic" -> binding.tvTitle.text = toFraktur(text)
+                    "Kanit" -> binding.tvTitle.text = toKanit(text)
+                    "Satoshi" -> binding.tvTitle.text = toSatoshi(text)
+                    "Poppins" -> binding.tvTitle.text = toPoppins(text)
+                    "Product Sans" -> binding.tvTitle.text = toProductSans(text)
+                }
 
-                shortcutManager?.dynamicShortcuts = listOf(shortcutInfo)
-
-                val pinnedShortcutCallbackIntent = shortcutManager.createShortcutResultIntent(shortcutInfo)
-
-                val successCallback = PendingIntent.getBroadcast(
-                    this, 0,
-                    pinnedShortcutCallbackIntent,
-                    PendingIntent.FLAG_IMMUTABLE
-                )
-
-                shortcutManager.requestPinShortcut(shortcutInfo, successCallback.intentSender)
-            } else {
-                Toast.makeText(this, "SHORTCUT NOT SUPPORT", Toast.LENGTH_SHORT).show()
+                strFont = font
             }
-        } else {
-            if (ShortcutManagerCompat.isRequestPinShortcutSupported(this)) {
-                val shortcutInfo = ShortcutInfoCompat.Builder(this, shortcutID)
-                    .setShortLabel("Telegram")
-                    .setLongLabel("Mở Telegram")
-                    .setIcon(buildTelegramAdaptiveIcon())
-                    .setIntent(telegramIntent)
-                    .build()
+        })
 
-                ShortcutManagerCompat.requestPinShortcut(this, shortcutInfo, null)
-                Toast.makeText(this, "SHORTCUT ADDED", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "SHORTCUT NOT SUPPORT", Toast.LENGTH_SHORT).show()
+        colorAdapter.callBackColor(object : CallBack.CallBackColor {
+            override fun callBackColor(color: String, position: Int) {
+                colorAdapter.checkSelectView(position)
+
+                strColor = color
+                binding.ivIcon.setColorFilter(Color.parseColor(strColor), PorterDuff.Mode.SRC_IN)
             }
+        })
+
+        backgroundAdapter.callBackColor(object : CallBack.CallBackColor {
+            override fun callBackColor(color: String, position: Int) {
+                backgroundAdapter.checkSelectView(position)
+
+                strBackground = color
+                binding.loBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor(color))
+            }
+        })
+
+        binding.tvNext.setOnClickListener {
+            if (strFont.isEmpty()) {
+                return@setOnClickListener
+            }
+            if (strColor.isEmpty()) {
+                return@setOnClickListener
+            }
+            if (strBackground.isEmpty()) {
+                return@setOnClickListener
+            }
+            val bundle = Bundle()
+            bundle.putString("KEY_COLOR_ICON", strColor)
+            bundle.putString("KEY_COLOR_BACKGROUND", strBackground)
+            bundle.putString("KEY_FONT", strFont)
+            showActivity(CreateEditShortcutActivity::class.java, bundle)
         }
     }
 
-    private fun buildTelegramAdaptiveIcon(): IconCompat {
-        val size = resources.getDimensionPixelSize(android.R.dimen.app_icon_size)
-        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-
-        val bg = AppCompatResources.getDrawable(this, R.drawable.ic_telegram_adaptive_background)!!
-        val wrappedDrawable = DrawableCompat.wrap(bg)
-        DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#000000")) // màu đen
-        DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SRC_IN)
-
-        val fg = AppCompatResources.getDrawable(this, R.drawable.ic_telegram_adaptive_foreground)!!
-        val wrappedDrawable2 = DrawableCompat.wrap(fg)
-        DrawableCompat.setTint(wrappedDrawable2, Color.parseColor("#303030")) // màu đen
-        DrawableCompat.setTintMode(wrappedDrawable2, PorterDuff.Mode.SRC_IN)
-
-
-        val a = (0.5f.coerceIn(0f, 1f) * 255).toInt()
-        bg.alpha = a
-        fg.alpha = a
-
-
-        bg.setBounds(0, 0, size, size); bg.draw(canvas)
-        fg.setBounds(0, 0, size, size); fg.draw(canvas)
-
-        return IconCompat.createWithAdaptiveBitmap(bitmap) // API 26+
+    private fun initRecyclerviewFont() {
+        binding.recyclerViewFont.apply {
+            layoutManager = LinearLayoutManager(this@EditShortcutActivity, LinearLayoutManager.HORIZONTAL, false)
+            fontAdapter.addAll(listFont)
+            adapter = fontAdapter
+        }
     }
 
-    private fun buildTelegramIcon(): Icon {
-        val size = resources.getDimensionPixelSize(android.R.dimen.app_icon_size)
-        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-
-        val bg = AppCompatResources.getDrawable(this, R.drawable.ic_telegram_adaptive_background)!!
-        val fg = AppCompatResources.getDrawable(this, R.drawable.ic_telegram_adaptive_foreground)!!
-        val wrappedDrawable = DrawableCompat.wrap(bg)
-        DrawableCompat.setTint(wrappedDrawable, Color.parseColor("#000000")) // màu đen
-        DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SRC_IN)
-
-        val wrappedDrawable2 = DrawableCompat.wrap(fg)
-        DrawableCompat.setTint(wrappedDrawable2, Color.parseColor("#303030")) // màu đen
-        DrawableCompat.setTintMode(wrappedDrawable2, PorterDuff.Mode.SRC_IN)
-
-        val a = (0.5f.coerceIn(0f, 1f) * 255).toInt()
-        bg.alpha = a
-        fg.alpha = a
-
-        bg.setBounds(0, 0, size, size); bg.draw(canvas)
-        fg.setBounds(0, 0, size, size); fg.draw(canvas)
-
-        return Icon.createWithBitmap(bitmap) // API 26+
+    private fun initRecyclerviewColor() {
+        binding.recyclerViewColor.apply {
+            layoutManager = LinearLayoutManager(this@EditShortcutActivity, LinearLayoutManager.HORIZONTAL, false)
+            colorAdapter.addAll(listIconColor)
+            adapter = colorAdapter
+        }
     }
 
+    private fun initRecyclerviewBackground() {
+        binding.recyclerViewBackground.apply {
+            layoutManager = LinearLayoutManager(this@EditShortcutActivity, LinearLayoutManager.HORIZONTAL, false)
+            backgroundAdapter.addAll(listBackgroundColor)
+            adapter = backgroundAdapter
+        }
+    }
 }

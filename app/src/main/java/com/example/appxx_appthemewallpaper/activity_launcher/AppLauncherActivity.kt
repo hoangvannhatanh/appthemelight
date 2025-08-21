@@ -1,6 +1,5 @@
 package com.example.appxx_appthemewallpaper.activity_launcher
 
-import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri

@@ -20,4 +20,7 @@ class CallBack {
     interface CallBackFont {
         fun callBackFont(font: String, position: Int)
     }
+    interface CallBackColor {
+        fun callBackColor(color: String, position: Int)
+    }
 }

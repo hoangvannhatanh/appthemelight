@@ -184,10 +184,6 @@
         <activity
             android:name=".activity.SelectTopicShortcutActivity"
             android:exported="true"/>
-
-        <activity
-            android:name=".activity.EditShortcutActivity"
-            android:exported="true"/>
         <activity
             android:name=".activity.CreateWidgetActivity"
             android:exported="true"/>
@@ -214,6 +210,12 @@
             android:exported="true"/>
         <activity
             android:name=".activity.CreateShortcutActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".activity.CreateEditShortcutActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".activity.EditShortcutActivity"
             android:exported="true"/>
         <activity
             android:name=".activity.MainActivity"
