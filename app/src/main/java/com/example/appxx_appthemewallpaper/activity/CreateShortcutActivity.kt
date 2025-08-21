@@ -8,6 +8,8 @@ import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.widget.Toast
@@ -16,6 +18,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.graphics.drawable.IconCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appxx_appthemewallpaper.R
