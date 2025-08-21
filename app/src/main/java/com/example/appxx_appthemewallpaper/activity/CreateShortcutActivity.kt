@@ -26,8 +26,8 @@ import com.example.appxx_appthemewallpaper.model.LaunchApp
 import com.example.appxx_appthemewallpaper.model.ThemeApp
 import com.example.appxx_appthemewallpaper.util.CallBack
 import com.example.appxx_appthemewallpaper.util.Util.Companion.getTheme1
+import com.example.appxx_appthemewallpaper.util.Util.Companion.getTheme2
 import com.example.appxx_appthemewallpaper.util.getListFont
-import com.example.appxx_appthemewallpaper.util.toFraktur
 
 class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.layout.activity_create_shortcut) {
 
@@ -37,17 +37,29 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
     private val createShortcutAdapter by lazy { CreateShortcutAdapter() }
     private var listFont: MutableList<String> = arrayListOf()
     private val fontAdapter by lazy { FontAdapter() }
+    private var numberTopicShortcut = "1"
 
     override fun setBinding(layoutInflater: LayoutInflater) = ActivityCreateShortcutBinding.inflate(layoutInflater)
 
     override fun bindComponent() {
         listFont = getListFont()
+
         listAppHaveOnDevice = queryAllLaunchApps()
-        listThemeShortcut = getTheme1()
+
+        getThemeShortcut()
 
         getListCreateApp()
 
         initRecyclerviewFont()
+    }
+
+    private fun getThemeShortcut() {
+        numberTopicShortcut = intent?.extras?.getString("TOPIC_SHORTCUT") ?: "1"
+        listThemeShortcut = when (numberTopicShortcut) {
+            "1" -> getTheme1()
+            "2" -> getTheme2()
+            else -> getTheme1()
+        }
     }
 
     private fun getListCreateApp() {
@@ -95,9 +107,7 @@ class CreateShortcutActivity : BaseActivity<ActivityCreateShortcutBinding>(R.lay
         initRecyclerviewApp()
     }
 
-    override fun bindData() {
-
-    }
+    override fun bindData() {}
 
     override fun bindEvent() {
         createShortcutAdapter.callBackLaunchApp(object : CallBack.CallBackLaunchApp {

@@ -19,7 +19,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun bindEvent() {
         binding.btnCreateShortcut.setOnClickListener {
-            showActivity(CreateShortcutActivity::class.java)
+            showActivity(SelectTopicShortcutActivity::class.java)
         }
         binding.btnEditShortcut.setOnClickListener {
             showActivity(EditShortcutActivity::class.java)
